@@ -59,7 +59,8 @@ Chakra Pool (US$18 million+ in deposits), HeliSwap (a US$2.5 million Hedera Foun
 WU Vienna (top 10%), then a double master's at London Business School and Fudan in Shanghai, with an exchange semester at the University of Hong Kong. He speaks German and Mandarin natively.
 
 ### How can I reach him?
-LinkedIn is the only contact on this site: linkedin.com/in/andre-ringdorfer. Send him a message there.
+LinkedIn is the best way to reach André: linkedin.com/in/andre-ringdorfer. You can also explore his code on GitHub at github.com/ringman007.
 
 ## Contact
-- LinkedIn only: https://www.linkedin.com/in/andre-ringdorfer/
+- LinkedIn: https://www.linkedin.com/in/andre-ringdorfer/
+- GitHub: https://github.com/ringman007/
