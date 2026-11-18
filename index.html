@@ -2,358 +2,457 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>André Ringdorfer</title>
-<meta name="description" content="André Ringdorfer runs a team of AI agents from a Raspberry Pi in Hong Kong. They ship code while he sleeps.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>André Ringdorfer / 苏文</title>
+<meta name="description" content="André Ringdorfer runs a team of AI agents from a Raspberry Pi in Hong Kong. They work around the clock. Before AI, he shipped crypto.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<style>
-html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
-/* Concept: the page runs on Hong Kong time. By day André works; at night his agents take the shift.
-   The sky, the skyline's lit windows and the hero copy follow the real hour. Below the fold: each AI project drawn as the flow it actually runs. */
-:root{
-  --display:'Bricolage Grotesque','Instrument Sans',system-ui,sans-serif;
-  --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  /* day */
-  --bg:#F3F5F6; --ink:#101521; --muted:#5B6474; --rule:#D9DEE5; --card:#FFFFFF; --accent:#1F4FD8; --lamp:#F2A93B;
-  --sky-a:#BFD6EA; --sky-b:#EEF3F6; --tower:#2B3448; --tower-2:#3D4860;
-  color-scheme:light;
-}
-body.night{
-  --bg:#0B1020; --ink:#E7EAF4; --muted:#98A2BE; --rule:#232B45; --card:#121933; --accent:#9DB4FF; --lamp:#FFC46B;
-  --sky-a:#050816; --sky-b:#1A2346; --tower:#0A0F1F; --tower-2:#121a33;
-  color-scheme:dark;
-}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;transition:background .8s,color .8s}
-a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{text-decoration-thickness:2px}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.mono{font-family:var(--mono);font-size:13px;letter-spacing:.01em}
-.muted{color:var(--muted)}
-
-/* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;color:var(--ink)}
-.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:48px;align-items:start;padding-block:28px 300px}
-.top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-.top b{font-weight:600}
-.top .zh{color:var(--muted);margin-left:8px;font-weight:400}
-.clock{font-family:var(--mono);font-size:14px;display:inline-flex;gap:10px;align-items:center;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--card) 70%,transparent);border:1px solid var(--rule);backdrop-filter:blur(6px)}
-.clock i{width:8px;height:8px;border-radius:50%;background:var(--lamp);box-shadow:0 0 10px var(--lamp)}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6.4vw,84px);line-height:.98;letter-spacing:-.035em;margin:56px 0 24px;text-wrap:balance}
-h1 em{font-style:normal;font-weight:400}
-.lede{font-size:clamp(18px,1.6vw,21px);max-width:34ch;margin:0 0 28px;color:var(--ink);opacity:.86}
-.switch{font:500 15px var(--sans);color:var(--ink);background:color-mix(in srgb,var(--card) 80%,transparent);border:1px solid var(--rule);border-radius:999px;padding:10px 18px;cursor:pointer;backdrop-filter:blur(6px)}
-.switch:hover{border-color:var(--ink)}
-
-/* the Pi panel */
-.pi{margin-top:72px;background:color-mix(in srgb,var(--card) 82%,transparent);border:1px solid var(--rule);border-radius:14px;padding:18px;backdrop-filter:blur(10px);box-shadow:0 20px 50px -30px rgba(0,0,0,.45)}
-.pi header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-.pi header b{font-family:var(--display);font-weight:600;font-size:18px}
-.agent{display:grid;grid-template-columns:auto 1fr auto;gap:2px 12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)}
-.agent .dot{width:9px;height:9px;border-radius:50%;background:var(--muted);align-self:center}
-.agent.on .dot{background:var(--lamp);box-shadow:0 0 0 4px color-mix(in srgb,var(--lamp) 25%,transparent)}
-.agent b{font-weight:600}
-.agent span.role{grid-column:2/4;color:var(--muted);font-size:14px}
-.agent .st{font-family:var(--mono);font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.agent.on .st{color:var(--ink)}
-.pi .note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
-
-/* ---------- sections ---------- */
-section{padding-block:96px 0}
-.h2{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:36px}
-h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.4vw,56px);letter-spacing:-.03em;line-height:1;margin:0}
-.h2 p{margin:0;max-width:40ch;color:var(--muted)}
-
-.proj{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:32px;padding:32px 0;border-top:1px solid var(--rule)}
-.proj h3{font-family:var(--display);font-weight:600;font-size:28px;letter-spacing:-.02em;margin:0 0 6px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
-.tag{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--muted);border:1px solid var(--rule);border-radius:999px;padding:2px 10px;letter-spacing:0}
-.tag.live{color:var(--ink);border-color:var(--lamp)}
-.proj p{margin:0 0 10px;max-width:52ch}
-.proj .proof{color:var(--muted);font-size:15px}
-.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;align-self:center;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px}
-.flow .n{font-family:var(--mono);font-size:12.5px;padding:7px 11px;border-radius:8px;border:1px solid var(--rule);background:var(--bg);white-space:nowrap}
-.flow .n.ai{border-color:var(--accent);color:var(--accent)}
-.flow .n.out{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.flow .a{color:var(--muted);font-family:var(--mono)}
-.flow .br{display:flex;flex-direction:column;gap:6px}
-.flow small{flex-basis:100%;font-size:12.5px;color:var(--muted);margin-top:4px}
-
-.lab{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:8px}
-.lab div{border:1px solid var(--rule);border-radius:12px;padding:16px;background:var(--card)}
-.lab b{display:block;font-weight:600;margin-bottom:2px}
-.lab span{color:var(--muted);font-size:15px}
-
-.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
-.how h3{font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:-.015em;margin:0 0 8px}
-.how p{margin:0;color:var(--muted)}
-
-.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--rule)}
-.fig{padding:24px 20px 24px 0;border-bottom:1px solid var(--rule)}
-.fig b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(30px,3.4vw,44px);letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
-.fig span{display:block;font-weight:500;margin-top:6px}
-.fig small{display:block;color:var(--muted);font-size:14px}
-
-.cv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
-.cv h3{font-size:14px;font-weight:600;color:var(--muted);margin:0 0 12px}
-.cv ol{list-style:none;margin:0;padding:0}
-.cv li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;padding:11px 0;border-top:1px solid var(--rule)}
-.cv li .y{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
-.cv li small{display:block;color:var(--muted);font-size:14px}
-
-footer{margin-top:110px;border-top:1px solid var(--rule)}
-footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-block:28px 40px}
-.big{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,48px);letter-spacing:-.03em;line-height:1.05;margin:0 0 10px}
-
-@media (max-width:860px){
-  .hero .wrap{grid-template-columns:1fr;gap:0;padding-block:20px 230px}
-  h1{margin-top:40px}
-  .pi{margin-top:36px}
-  .proj{grid-template-columns:1fr;gap:18px}
-  .lab,.how{grid-template-columns:1fr}
-  .figs{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cv{grid-template-columns:1fr;gap:36px}
-  section{padding-block:72px 0}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-</style>
-<link rel="canonical" href="https://andre-ringdorfer.com/">
-<link rel="alternate" type="text/plain" href="/llms.txt">
-<meta property="og:title" content="André Ringdorfer">
-<meta property="og:description" content="I run a team of AI agents from a Raspberry Pi. They ship code while I sleep.">
-<meta property="og:url" content="https://andre-ringdorfer.com/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"André Ringdorfer","alternateName":"苏文","url":"https://andre-ringdorfer.com/","jobTitle":"Senior Product Manager","address":{"@type":"PostalAddress","addressLocality":"Hong Kong"},"knowsAbout":["AI agents","LLM applications","Product management","DeFi","Blockchain"],"knowsLanguage":["de","zh","en","ru","fr"],"alumniOf":["WU Vienna University of Economics and Business","London Business School","Fudan University School of Management"],"sameAs":["https://www.linkedin.com/in/andre-ringdorfer/","https://github.com/ringman007"]}</script>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="footer.css">
+<style>.ft{--ft-max:1180px;--ft-gut:var(--gut)}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "André Ringdorfer", "alternateName": "苏文", "url": "https://andre-ringdorfer.com/", "jobTitle": "Senior Product Manager", "worksFor": {"@type": "Organization", "name": "Techtonic Consulting"}, "address": {"@type": "PostalAddress", "addressLocality": "Hong Kong"}, "description": "Senior product manager in onchain finance in Hong Kong who builds AI agents. Before AI, he shipped crypto products including Sherpa Stake, Chakra Pool and HeliSwap.", "knowsAbout": ["AI agents", "Product management", "Onchain finance", "DeFi", "Strategy"], "knowsLanguage": ["de", "zh", "en", "ru", "fr"], "alumniOf": ["WU Vienna University of Economics and Business", "London Business School", "Fudan University School of Management"], "sameAs": ["https://www.linkedin.com/in/andre-ringdorfer/"]}</script>
 </head>
 <body>
-<header class="hero" id="hero">
-  <canvas id="sky" aria-hidden="true"></canvas>
-  <div class="wrap">
-    <div class="top">
-      <span><b>André Ringdorfer</b><span class="zh" lang="zh">苏文</span></span>
-      <span class="clock" aria-live="polite"><i></i><span id="clock">Hong Kong</span></span>
-    </div>
-    <div>
-      <h1 id="h1">I run a team of AI agents from a Raspberry&nbsp;Pi.</h1>
-      <p class="lede" id="lede">By day I build products in onchain finance. When I log off, my agents take the night shift and ship code while I sleep.</p>
-      <button class="switch" id="switch" type="button">See the night shift</button>
-    </div>
-    <aside class="pi" aria-label="Agents running on the Raspberry Pi">
-      <header><b>On the Pi right now</b><span class="mono muted">Raspberry Pi 5</span></header>
-      <div class="agent on"><span class="dot"></span><b>Forge</b><span class="st" id="forge">next run 00:00</span><span class="role">Coding agent. Picks up issues, opens pull requests, reports on Telegram.</span></div>
-      <div class="agent on"><span class="dot"></span><b>Hooks</b><span class="st">watching inbox</span><span class="role">Turns important email into Telegram alerts.</span></div>
-      <div class="agent on"><span class="dot"></span><b>Main</b><span class="st">listening</span><span class="role">Takes requests from my phone, from anywhere.</span></div>
-      <p class="note">The countdown follows Forge's real 30-minute schedule, in Hong Kong time.</p>
-    </aside>
+
+<header class="hero" id="hero" data-sky="day">
+  <div class="wrap top">
+    <a class="who" href="index.html" aria-label="André Ringdorfer, home"><b>André Ringdorfer</b><i>/</i><span class="zh" lang="zh">苏文</span></a>
+    <nav class="nav" aria-label="Site"><a href="#work">AI work</a><a href="experience.html">Experience</a><a href="https://www.linkedin.com/in/andre-ringdorfer/" target="_blank" rel="noopener">LinkedIn</a></nav>
   </div>
+  <div class="wrap stage">
+    <div class="lead">
+      <h1><span class="dayt">I run a team of AI agents from a Raspberry&nbsp;Pi.</span><span class="nightt">The night shift is fully&nbsp;staffed.</span></h1>
+      <div class="subs" aria-live="polite"><p id="sub"></p><p class="ghost" id="subg" aria-hidden="true"></p></div>
+      <div class="acts">
+        <a class="btn solid" href="#work">What I build with AI <span aria-hidden="true">↓</span></a>
+        <button class="btn" id="flip" type="button">See the night shift</button>
+      </div>
+    </div>
+    <figure class="rig" aria-label="Illustration: live activity traces for four of my AI agents">
+      <div class="lane"><div class="lh"><b>The Forge</b><span></span></div><canvas></canvas></div><div class="lane"><div class="lh"><b>GoodInGoodOut</b><span></span></div><canvas></canvas></div><div class="lane"><div class="lh"><b>Portfolio dashboard</b><span></span></div><canvas></canvas></div><div class="lane"><div class="lh"><b>Video studio</b><span></span></div><canvas></canvas></div>
+      <figcaption><span id="fcap">My agents, right now.</span> <span id="ftime"></span></figcaption>
+    </figure>
+  </div>
+  <div class="city" aria-hidden="true"><div>
+    <div class="orb"></div>
+    <svg id="sky" viewBox="0 0 1600 280" preserveAspectRatio="xMidYMax meet"></svg>
+  </div></div>
 </header>
 
-<main class="wrap">
-  <section aria-labelledby="ai">
-    <div class="h2"><h2 id="ai">What I build with AI</h2><p>Each one is drawn as the flow it actually runs.</p></div>
+<section class="proof" aria-label="Experience">
+  <div class="wrap"><div>
+    <p><b>US$1 billion+</b> staked on a platform I built. <b>US$18 million+</b> in my savings vaults. <b>7,000+</b> developers onboarded. That was before AI.</p>
+    <a href="experience.html">See my full experience →</a>
+  </div></div>
+</section>
 
-    <article class="proj">
-      <div>
-        <h3>Forge <span class="tag live">running</span></h3>
-        <p>My self-hosted agent stack. Three agents on a Raspberry Pi 5, reachable from my phone anywhere over a private network.</p>
-        <p class="proof">It has merged six pull requests into Keepr on its own. I found and patched two bugs in the API proxy it runs on.</p>
-      </div>
-      <div class="flow" aria-label="Forge flow">
-        <span class="n">every 30 min</span><span class="a">→</span><span class="n ai">Forge reads the repo</span><span class="a">→</span><span class="n ai">writes the change</span><span class="a">→</span><span class="n out">pull request</span><span class="a">→</span><span class="n">Telegram report</span>
-        <small>Gmail → Hooks → Telegram runs alongside it, and Main answers whatever I send from my phone.</small>
-      </div>
-    </article>
-
-    <article class="proj">
-      <div>
-        <h3>GoodInGoodOut <span class="tag live">bot live</span><span class="tag">iOS in build</span></h3>
-        <p>A calorie tracker you just talk to. Describe a meal and it itemises every part of it.</p>
-        <p class="proof">I use the Telegram bot every day. The iOS app is being built against a 65-item requirements matrix.</p>
-      </div>
-      <div class="flow" aria-label="GoodInGoodOut flow">
-        <span class="n">"two eggs, toast, flat white"</span><span class="a">→</span><span class="n">known-foods cache</span><span class="a">→</span><span class="n">USDA database</span><span class="a">→</span><span class="n ai">Claude</span><span class="a">→</span><span class="n out">itemised log</span>
-        <small>The cheapest reliable source answers first. The model only fills the gaps.</small>
-      </div>
-    </article>
-
-    <article class="proj">
-      <div>
-        <h3>Form D Oracle <span class="tag">demo</span></h3>
-        <p>An autonomous agent that records SEC filings onchain, so anyone can prove a document hasn't been changed.</p>
-        <p class="proof">Next: an identity for the agent itself and a signed receipt for every decision it makes.</p>
-      </div>
-      <div class="flow" aria-label="Form D Oracle flow">
-        <span class="n">SEC EDGAR</span><span class="a">→</span><span class="n ai">agent fetches Form D</span><span class="a">→</span><span class="n">hash</span><span class="a">→</span><span class="n out">anchored onchain</span><span class="a">→</span><span class="n">verify in browser</span>
-      </div>
-    </article>
-
-    <article class="proj">
-      <div>
-        <h3>AI video pipeline <span class="tag">in progress</span></h3>
-        <p>Open-source video generation with a second model as the critic. Weak clips get sent back for another take.</p>
-      </div>
-      <div class="flow" aria-label="Video pipeline flow">
-        <span class="n">radar</span><span class="a">→</span><span class="n ai">ideation</span><span class="a">→</span><span class="n">render · Wan 2.2 · RTX 5090</span><span class="a">→</span><span class="n ai">AI judge</span><span class="a">→</span><span class="n out">publish</span>
-        <small>Rejected clips loop back to render with the judge's notes.</small>
-      </div>
-    </article>
-
-    <div class="lab">
-      <div><b>Keepr</b><span>A personal CRM you text in plain words. Partly maintained by Forge.</span></div>
-      <div><b>AEO toolkit</b><span>Makes websites readable by ChatGPT and Perplexity. Used in client audits.</span></div>
-      <div><b>Date Doctor</b><span>Date ideas from both partners' preferences.</span></div>
-      <div><b>Build-your-Bob</b><span>The shared framework behind all my bots.</span></div>
-      <div><b>Polymarket monitor</b><span>Live markets checked against breaking news.</span></div>
-      <div><b>DoomDraft</b><span>An endless AI feed in any brand's voice.</span></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="how">
-    <div class="h2"><h2 id="how">How I work</h2></div>
-    <div class="how">
-      <div><h3>Spec first, then agents</h3><p>I write the requirements and the checks. AI coding agents build against them, and the build fails on anything left unfinished.</p></div>
-      <div><h3>Research in days</h3><p>Competitive analyses and market studies that used to take weeks. For one, I mapped 538 data feeds and graded how proprietary each really was.</p></div>
-      <div><h3>Straight from the chain</h3><p>When a stablecoin slips off its peg, I read the raw onchain data to find out who holds it and why.</p></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="crypto">
-    <div class="h2"><h2 id="crypto">Before AI, I shipped crypto</h2><p>Products I built or led, and what they did.</p></div>
-    <div class="figs">
-      <div class="fig"><b>$1B+</b><span>Sherpa Stake</span><small>tokens staked at peak</small></div>
-      <div class="fig"><b>$18M+</b><span>Chakra Pool</span><small>liquidity in yield vaults</small></div>
-      <div class="fig"><b>$7M+</b><span>HeliSwap</span><small>TVL, plus a $2.5M Hedera grant</small></div>
-      <div class="fig"><b>$6M+</b><span>Anonymous DeFi project</span><small>TVL, launched without my name</small></div>
-      <div class="fig"><b>7,000+</b><span>Developer course</span><small>developers onboarded</small></div>
-      <div class="fig"><b>7 / 150+</b><span>RWAccelerator</span><small>projects picked, with Google Cloud</small></div>
-      <div class="fig"><b>$14K+</b><span>ETHGlobal</span><small>hackathon prizes</small></div>
-      <div class="fig"><b>5</b><span>Languages</span><small>German, Mandarin, English, Russian, French</small></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="cv">
-    <div class="h2"><h2 id="cv">The route here</h2></div>
-    <div class="cv">
-      <div><h3>Work</h3><ol>
-        <li><span class="y">2022 – now</span><span>Senior Product Manager<small>Tectonic Consulting, for MANTRA Chain · Hong Kong</small></span></li>
-        <li><span class="y">2022 – 2025</span><span>Senior Manager, Product &amp; Strategy<small>HeliSwap, a MANTRA joint venture</small></span></li>
-        <li><span class="y">2020 – 2022</span><span>APAC Management Associate<small>ASSA ABLOY</small></span></li>
-        <li><span class="y">2020</span><span>Strategy Consulting<small>Arthur D. Little · Vienna</small></span></li>
-        <li><span class="y">2019 – 2020</span><span>Strategic Project Management<small>PayPal · London</small></span></li>
-        <li><span class="y">2019</span><span>Research Assistant<small>United Nations ESCAP · Bangkok</small></span></li>
-      </ol></div>
-      <div><h3>Study</h3><ol>
-        <li><span class="y">2018 – 2019</span><span>MSc International Business<small>Fudan School of Management · Shanghai</small></span></li>
-        <li><span class="y">2017 – 2018</span><span>MSc International Management<small>London Business School</small></span></li>
-        <li><span class="y">2016</span><span>Exchange, financial markets<small>The University of Hong Kong</small></span></li>
-        <li><span class="y">2013 – 2017</span><span>BSc International Business, top 10%<small>WU Vienna · CSC, Confucius and merit scholarships</small></span></li>
-      </ol></div>
-    </div>
-  </section>
-</main>
-
-<footer>
+<section class="intro" id="work">
   <div class="wrap">
-    <div><p class="big">Building something with AI?</p><a href="https://www.linkedin.com/in/andre-ringdorfer/" target="_blank" rel="noopener">Talk to me on LinkedIn</a></div>
-    <span class="mono muted" style="align-self:end">andre-ringdorfer.com</span>
+    <h2 class="h2">What I build with AI</h2>
+    <p>I treat AI like a team. Every agent has a job and a standard to meet, and nothing ships without my review. Here's some of what they've helped me build.</p>
+  </div>
+</section>
+
+<section class="forge-s">
+  <div class="wrap split">
+    <div style="flex:1 1 340px;max-width:500px">
+      <div class="name">The Forge</div>
+      <h3 class="big">An AI engineer that works for me around the clock.</h3>
+      <p class="lede">It picks up tasks, writes the code and hands it in for review. Some of my own products are partly maintained by it.</p>
+    </div>
+    <div class="queue" aria-label="Illustration: The Forge working through a task queue overnight">
+      <div class="q-head"><b>Task queue</b><span><span id="fclock">03:30</span><em id="fwho">Overnight</em></span></div>
+      <div id="tasks"></div>
+      <div class="q-foot" id="ffoot"></div>
+    </div>
+  </div>
+</section>
+
+<section class="gigo">
+  <div class="wrap split">
+    <div style="flex:1 1 340px;max-width:520px">
+      <div class="name">GoodInGoodOut</div>
+      <h3 class="big">A calorie tracker you just talk to. Describe a meal and it logs every part of it.</h3>
+      <p class="lede">I use it every day. The iOS app is on its way.</p>
+      <div class="meals" id="meals"><button type="button">Breakfast</button><button type="button">Lunch</button><button type="button">Snack</button></div>
+    </div>
+    <div class="phone" aria-label="Illustration: a meal described in words and logged item by item">
+      <div class="screen">
+        <header><b>Today</b><span><span id="gtotal">0</span> kcal</span></header>
+        <div class="feed">
+          <div class="said"><span id="gtyped"></span><span class="caret" id="caret"></span></div>
+          <div><div id="gitems"></div><div class="logged" id="glogged"><span>Logged</span><span><span id="gmeal">0</span> kcal</span></div></div>
+        </div>
+        <div class="inputbar"><span>Describe a meal</span><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dash">
+  <div class="wrap">
+    <div class="name">Portfolio dashboard</div>
+    <div class="head">
+      <h3 class="big">Every account, wallet and position, pulled in automatically and aggregated into one live dashboard.</h3>
+      <p>No spreadsheets, no logging in to ten apps.</p>
+    </div>
+    <div class="panel" aria-label="Illustration: a combined portfolio view with amounts hidden">
+      <div class="total">
+        <div class="meta"><span>Total, all sources</span><span>Last refresh <span id="dclock">00:00:00</span></span></div>
+        <div class="amt"><b>•••,•••</b><span>Amounts hidden</span></div>
+        <div class="bars" id="bars"></div>
+      </div>
+      <div class="sources" id="sources"></div>
+    </div>
+  </div>
+</section>
+
+<section class="vid">
+  <div class="wrap split">
+    <div class="copy">
+      <div class="name">AI video studio</div>
+      <h3 class="big">Generates video, then a second AI critiques every clip.</h3>
+      <p class="lede">Only the best takes make the cut.</p>
+      <p class="sum" id="vsum"></p>
+    </div>
+    <div class="takes" id="takes" aria-label="Illustration: six takes scored by an AI critic, two kept and four cut"></div>
+  </div>
+</section>
+
+<section class="small">
+  <div class="wrap">
+    <h3>Smaller projects</h3>
+    <div class="ledger">
+      <div><span class="n">Keepr</span><span class="d">A personal CRM you text in plain words.</span></div>
+      <div><span class="n">AEO toolkit</span><span class="d">Makes websites readable by ChatGPT and Perplexity.</span></div>
+      <div><span class="n">Build-your-Bob</span><span class="d">The shared framework behind all my bots.</span></div>
+      <div><span class="n">Date Doctor</span><span class="d">Date ideas from both partners' preferences.</span></div>
+      <div><span class="n">Polymarket monitor</span><span class="d">Live markets checked against breaking news.</span></div>
+      <div><span class="n">DoomDraft</span><span class="d">An endless AI feed in any brand's voice.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="ask" id="ask">
+  <div class="wrap split">
+    <div class="copy">
+      <h2 class="h2">Ask my agent.</h2>
+      <p>Questions about my work, projects and background. Every answer was written and approved by me, so nothing here is made up.</p>
+    </div>
+    <div class="box">
+      <div class="term" id="term">
+        <div class="log" id="log"><div class="m a">Hi. I know André's work, projects and background. Pick a question or type your own.</div></div>
+        <div class="qs" id="qs"></div>
+        <form id="askf"><input id="q" placeholder="Type your own question" aria-label="Type your own question" autocomplete="off"><button type="submit">Ask</button></form>
+      </div>
+      <p class="note">Too many people burned through my API credits asking this agent for poems, so it now runs on answers I wrote myself. No AI was harmed.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="ft" id="contact">
+  <div class="ft-in">
+    <div class="ft-main">
+      <div>
+        <h2>Let's talk.</h2>
+        <p class="ft-lede">Hiring for AI product, need something built with AI, or just curious? LinkedIn is the best way to reach me.</p>
+        <a class="ft-btn" href="https://www.linkedin.com/in/andre-ringdorfer/" target="_blank" rel="noopener">Message me on LinkedIn <span aria-hidden="true">→</span></a>
+      </div>
+      <nav class="ft-links" aria-label="Footer">
+        <div><h3>Site</h3><ul><li><a href="index.html#work">AI work</a></li><li><a href="experience.html">Experience</a></li><li><a href="https://www.linkedin.com/in/andre-ringdorfer/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+        <div><h3>Based</h3><ul><li><span>Hong Kong</span></li><li><span>UTC+8</span></li></ul></div>
+      </nav>
+    </div>
+    <div class="ft-base"><span>© 2026 André Ringdorfer · 苏文</span><span><i aria-hidden="true"></i>Fin. The Forge is still working.</span></div>
   </div>
 </footer>
 
 <script>
 (() => {
-  const TZ = 'Asia/Hong_Kong';
-  const hk = () => {
-    const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date()).map(x=>[x.type,x.value]));
-    return {h:+p.hour,m:+p.minute,s:+p.second};
-  };
-  const isNightHour = h => h >= 23 || h < 7;
-  let override = null; // null = follow the real clock
   const $ = id => document.getElementById(id);
-  const pad = n => String(n).padStart(2,'0');
+  const pad = n => String(n).padStart(2, '0');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hk = () => { const n = new Date(); return new Date(n.getTime() + (n.getTimezoneOffset() + 480) * 60000); };
+  const A = 'var(--accent)';
 
-  function copy(night, t){
-    const time = `${pad(t.h)}:${pad(t.m)}`;
-    if (night){
-      $('h1').innerHTML = override === null
-        ? `It's ${time} in Hong Kong. I'm asleep. <em>My agents aren't.</em>`
-        : `After midnight in Hong Kong, I'm asleep. <em>My agents aren't.</em>`;
-      $('lede').textContent = 'Forge wakes every 30 minutes, picks up the next task, opens a pull request and reports back on Telegram. I review it over breakfast.';
-      $('switch').textContent = override === null ? 'See the day shift' : 'Back to the day shift';
-    } else {
-      $('h1').innerHTML = 'I run a team of AI agents from a Raspberry&nbsp;Pi.';
-      $('lede').textContent = 'By day I build products in onchain finance. When I log off, my agents take the night shift and ship code while I sleep.';
-      $('switch').textContent = 'See the night shift';
-    }
-  }
+  /* ---------- skyline: Hong Kong Island from the harbour ---------- */
+  (function(){
+    const NS = 'http://www.w3.org/2000/svg', svg = $('sky'), G = 250;
+    const el = (t, a, parent = svg) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; };
+    let r = 20251118; const rnd = () => (r = r * 16807 % 2147483647) / 2147483647;
+    const R = (a, b) => a + rnd() * (b - a);
+    // the Peak and the ridge behind the towers
+    const ridge = [[0,170],[80,158],[160,140],[240,118],[310,98],[370,82],[420,70],[470,66],[520,74],[580,90],[640,104],[700,110],[760,104],[820,96],[880,102],[940,114],[1000,108],[1060,96],[1120,90],[1180,94],[1240,104],[1320,120],[1400,134],[1480,148],[1600,160]];
+    const ry = x => { for (let i = 1; i < ridge.length; i++) if (x <= ridge[i][0]){ const [x0,y0] = ridge[i-1], [x1,y1] = ridge[i], t = (x - x0) / (x1 - x0); return y0 + (y1 - y0) * (1 - Math.cos(t * Math.PI)) / 2; } return 160; };
+    let d = 'M0 ' + ry(0); for (let x = 8; x <= 1600; x += 8) d += ` L${x} ${ry(x).toFixed(1)}`;
+    el('path', {class:'sk-ridge', d: d + ' V250 H0Z'});
+    // Mid-Levels: slim residential towers climbing the hillside
+    for (let x = 0; x < 1600; ){ const w = R(7, 13), top = ry(x + w / 2) + R(-4, 26); el('rect', {class:'sk-mid', x:x.toFixed(1), y:top.toFixed(1), width:w.toFixed(1), height:(G - top).toFixed(1)}); x += w + R(0, 3); }
+    // second row: packed mid-rise, no gaps
+    for (let x = -4; x < 1600; ){ const w = R(14, 32), top = R(118, 196); el('rect', {class:'sk-back', x:x.toFixed(1), y:top.toFixed(1), width:w.toFixed(1), height:(G - top).toFixed(1)}); x += w + R(-2, 1.5); }
+    // windows and lit windows, drawn with each building so overlaps stay correct (grid 9 x 12)
+    let fx = 0, fy = 0;
+    const windows = (x, w, top, forge) => {
+      const g = el('g', {});
+      const x0 = Math.ceil((x + 4 - 2.5) / 9) * 9 + 2.5, y0 = Math.ceil((top + 7 - 3) / 12) * 12 + 3;
+      let col = 0;
+      for (let wx = x0; wx + 4 <= x + w - 4; wx += 9, col++){ let row = 0;
+        for (let wy = y0; wy + 6 <= G - 6; wy += 12, row++){
+          if (forge && col === 1 && row === 1){ fx = wx; fy = wy; continue; }
+          if (!(forge && col <= 2 && row <= 3) && rnd() < .14) el('rect', {class:'lit', x:wx, y:wy, width:4, height:6, 'fill-opacity':(.65 + rnd() * .35).toFixed(2)}, g);
+          else el('rect', {x:wx, y:wy, width:4, height:6, style:'fill:var(--win)'}, g);
+        } }
+    };
+    const tower = (x, w, top, forge) => { el('rect', {class:'sk-front', x:x.toFixed(1), y:top.toFixed(1), width:w.toFixed(1), height:(G - top).toFixed(1)}); windows(x, w, top, forge); };
+    // front filler: a continuous wall of towers along the waterfront
+    for (let x = -6; x < 1600; ){ const w = R(16, 30), top = R(168, 214); tower(x, w, top); x += w + R(-3, 1); }
+    // front towers: [x, width, top]
+    const FORGE = 760;
+    [[18,50,186],[74,44,166],[126,40,196],[172,48,150],[226,30,178],[262,46,160],[312,30,176],
+     [414,30,150],[448,40,132],[494,36,154],[596,40,100],[716,34,136],[760,46,132],[814,36,166],[856,44,146],[906,42,158],[954,36,126],
+     [1056,40,150],[1186,36,146],[1228,42,128],[1278,32,164],[1316,42,140],[1366,34,170],[1406,44,152],[1456,40,180],[1504,44,162],[1556,44,184],
+     [118,26,178],[296,22,150],[586,18,170],[630,20,160],[742,18,176],[938,20,170],[1110,24,136],[1176,14,170],[1344,22,160],[1442,18,166],[1540,18,176]]
+      .forEach(([x, w, top]) => tower(x, w, top, x === FORGE));
+    // IFC: the tallest, with its tapering crown
+    el('polygon', {class:'sk-front', points:'346,250 346,80 351,80 351,68 355,68 355,56 360,56 360,44 364,44 366,30 370,36 374,24 378,36 382,30 384,44 388,44 388,56 393,56 393,68 397,68 397,80 402,80 402,250'});
+    for (let x = 352; x < 398; x += 6) el('line', {class:'sk-x', x1:x, y1:86, x2:x, y2:G});
+    // The Center: stepped top and mast
+    el('polygon', {class:'sk-front', points:'536,250 536,104 542,104 542,96 548,96 548,90 566,90 566,96 572,96 572,104 578,104 578,250'});
+    el('line', {class:'sk-mast', x1:557, y1:90, x2:557, y2:62}); windows(536, 42, 108);
+    // Bank of China Tower: stacked triangular facets, cross-bracing, twin masts
+    const boc = el('polygon', {class:'sk-front', points:'648,250 648,156 664,140 664,118 680,102 680,80 700,58 708,58 708,250'});
+    el('line', {class:'sk-mast', x1:701, y1:58, x2:701, y2:26}); el('line', {class:'sk-mast', x1:706, y1:58, x2:706, y2:32});
+    el('clipPath', {id:'bocc'}).appendChild(boc.cloneNode());
+    const bx = el('g', {'clip-path':'url(#bocc)'});
+    for (let y = G; y > 50; y -= 52) el('path', {class:'sk-x', d:`M648 ${y} L708 ${y - 52} M708 ${y} L648 ${y - 52} M648 ${y - 52} H708`}, bx);
+    // Central Plaza: pyramid crown and spire
+    el('polygon', {class:'sk-front', points:'1000,250 1000,80 1022,60 1044,80 1044,250'});
+    el('line', {class:'sk-mast', x1:1022, y1:60, x2:1022, y2:28}); windows(1000, 44, 84);
+    // Hopewell Centre: the round one
+    el('rect', {class:'sk-front', x:1138, y:118, width:38, height:G - 118, rx:4}); el('ellipse', {class:'sk-front', cx:1157, cy:118, rx:19, ry:6}); windows(1138, 38, 126);
+    // Convention Centre roof on the waterfront
+    el('path', {class:'sk-front', d:'M1080 250 V226 Q1120 206 1176 226 V250Z'});
+    // harbour
+    el('rect', {class:'sk-shore', x:0, y:G - 1, width:1600, height:3});
+    el('rect', {class:'sk-water', x:0, y:G + 2, width:1600, height:28});
+    for (let i = 0; i < 90; i++){ const x = rnd() * 1580, y = G + 6 + rnd() * 20, l = 6 + rnd() * 22; el('line', {class: rnd() < .5 ? 'rip' : 'sk-rip', x1:x.toFixed(0), y1:y.toFixed(0), x2:(x + l).toFixed(0), y2:y.toFixed(0)}); }
+    // The Forge: one window, a label in clear sky, an arrow
+    el('rect', {class:'forge', x:fx - 1, y:fy - 1, width:6, height:8});
+    el('text', {class:'forge-l', x:836, y:66}).textContent = 'The Forge';
+    const ax = fx + 9, ay = fy + 3;
+    el('path', {class:'farrow', d:`M830 62 C 806 62, ${ax + 26} ${ay - 34}, ${ax} ${ay}`});
+    el('path', {class:'farrow', d:`M${ax + 2} ${ay - 9} L${ax} ${ay} L${ax + 9} ${ay - 4}`});
+  })();
 
-  // ---- sky + skyline ----
-  const cv = $('sky'), ctx = cv.getContext('2d');
-  let towers = [], stars = [], W = 0, H = 0, forgeWin = null;
-  function rand(seed){ return () => (seed = (seed*16807)%2147483647)/2147483647; }
-  function layout(){
-    const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio||1,2);
-    W = r.width; H = r.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-    const R = rand(11); towers = []; let x = -10;
-    const base = H, maxH = Math.min(260, H*.42);
-    while (x < W + 20){
-      const w = 34 + R()*70, h = maxH*(.35 + R()*.65) * (x > W*.55 && x < W*.8 ? 1.15 : 1);
-      const wins = [];
-      for (let yy = base - h + 14; yy < base - 10; yy += 13) for (let xx = x + 7; xx < x + w - 8; xx += 10) wins.push({x:xx,y:yy,lit:R()<.22,phase:R()*6});
-      towers.push({x,w,h,back:R()<.5,wins}); x += w + 2 + R()*6;
-    }
-    // Forge lives in one window of the tallest tower on the right half
-    const t = towers.filter(t=>t.x>W*.5).sort((a,b)=>b.h-a.h)[0] || towers[0];
-    forgeWin = t.wins[Math.floor(t.wins.length*.35)] || null;
-    const S = rand(5); stars = Array.from({length:140},()=>({x:S()*W,y:S()*H*.62,r:S()*1.1+.2,a:S()*.7+.2}));
+  /* ---------- day / night ---------- */
+  const realNight = () => { const h = hk().getHours(); return h >= 23 || h < 7; };
+  let night = realNight(), forced = false;
+  function sky(){
+    if (night) return 'night';
+    if (forced) return 'day';
+    const h = hk().getHours(); return (h >= 18 || h < 7) ? 'dusk' : 'day';
   }
-  const css = v => getComputedStyle(document.body).getPropertyValue(v).trim();
-  function draw(time){
-    const night = document.body.classList.contains('night');
-    const g = ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,css('--sky-a')); g.addColorStop(1,css('--sky-b'));
-    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-    if (night){ for (const s of stars){ ctx.globalAlpha = s.a*(.75+.25*Math.sin(time/900+s.x)); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,7); ctx.fill(); } ctx.globalAlpha=1; }
-    for (const pass of [true,false]) for (const t of towers){
-      if (t.back !== pass) continue;
-      ctx.fillStyle = pass ? css('--tower-2') : css('--tower');
-      const hh = pass ? t.h*.82 : t.h; ctx.fillRect(t.x, H-hh, t.w, hh);
-      if (!pass) for (const w of t.wins){
-        if (night && w.lit){ ctx.fillStyle = css('--lamp'); ctx.globalAlpha = .55 + .25*Math.sin(time/1600 + w.phase); ctx.fillRect(w.x,w.y,5,7); }
-        else if (!night){ ctx.fillStyle = '#9fb6cc'; ctx.globalAlpha = .18; ctx.fillRect(w.x,w.y,5,7); }
-        ctx.globalAlpha = 1;
-      }
-    }
-    if (forgeWin){ // Forge's window: always on, brighter at night
-      const pulse = .6 + .4*Math.sin(time/700);
-      ctx.fillStyle = css('--lamp'); ctx.shadowColor = css('--lamp'); ctx.shadowBlur = night ? 18*pulse : 6;
-      ctx.fillRect(forgeWin.x-1, forgeWin.y-1, 7, 9); ctx.shadowBlur = 0;
-      ctx.font = '12px JetBrains Mono, monospace'; ctx.fillStyle = night ? '#FFE3B3' : css('--ink');
-      ctx.globalAlpha = .9; ctx.fillText('← Forge', forgeWin.x + 12, forgeWin.y + 8); ctx.globalAlpha = 1;
-    }
+  const scripts = {
+    day: t => ['By day, I build products in onchain finance.', 'When I log off, my agents take the night shift.'],
+    night: t => ["That's The Forge. It runs on a Raspberry Pi and never clocks off.", 'Work gets done around the clock.']
+  };
+  let subGen = 0;
+  function playSubs(){
+    const gen = ++subGen;
+    const t = hk(), lines = scripts[night ? 'night' : 'day'](`${pad(t.getHours())}:${pad(t.getMinutes())}`), el = $('sub');
+    el.innerHTML = ''; $('subg').textContent = scripts[night ? 'day' : 'night']('').join(' ');
+    lines.forEach((l, i) => {
+      const sp = document.createElement('span'); sp.textContent = l + ' '; if (/^\d/.test(l)) sp.classList.add('when');
+      if (!reduce){ sp.className = 'out'; setTimeout(() => { if (gen === subGen){ sp.classList.remove('out'); } }, 250 + i * 650); }
+      el.appendChild(sp);
+    });
   }
+  function setScene(){
+    $('hero').dataset.sky = sky();
+    $('flip').textContent = night ? 'See the day shift' : 'See the night shift';
+    $('fcap').textContent = night ? 'Still working. Around the clock.' : 'My agents, right now.';
+    if (typeof setPace === 'function') setPace();
+  }
+  $('flip').onclick = () => { night = !night; forced = true; setScene(); playSubs(); };
 
+  /* ---------- clocks ---------- */
   function tick(){
     const t = hk();
-    const night = override === null ? isNightHour(t.h) : override;
-    document.body.classList.toggle('night', night);
-    $('clock').textContent = `${pad(t.h)}:${pad(t.m)} in Hong Kong · ${night ? 'night shift' : 'day shift'}`;
-    const left = ((30 - (t.m % 30)) * 60 - t.s) % 1800;
-    $('forge').textContent = left > 1790 ? 'running now' : `next run ${pad(Math.floor(left/60))}:${pad(left%60)}`;
-    copy(night, t);
+
+    $('ftime').textContent = `${pad(t.getHours())}:${pad(t.getMinutes())}:${pad(t.getSeconds())} HKT`;
+    $('dclock').textContent = `${pad(t.getHours())}:${pad(t.getMinutes())}:${pad(t.getSeconds())}`;
+    if (!forced && realNight() !== night){ night = realNight(); setScene(); playSubs(); }
   }
-  $('switch').addEventListener('click', () => {
-    const t = hk(); const realNight = isNightHour(t.h);
-    const current = document.body.classList.contains('night');
-    override = !current === realNight ? null : !current;
-    tick();
+
+  /* ---------- The Forge queue ---------- */
+  const TITLES = ['Fix the reminder that fires twice', 'Add export to the weekly summary', 'Speed up search', 'Tidy the settings page'];
+  const FCLOCK = ['23:40','00:05','00:40','01:15','01:50','02:20','02:55','03:30','04:00','04:35','05:10','05:45','06:30','08:30','08:31','08:33','08:34','08:35'];
+  $('tasks').innerHTML = TITLES.map(t => `<div class="task"><div><span class="t">${t}</span><span class="s"></span></div><div class="bar"><i></i></div></div>`).join('');
+  const taskEls = [...$('tasks').children];
+  function forge(t){
+    const fs = reduce ? 12 : t % 18; let waiting = 0, approved = 0;
+    taskEls.forEach((el, i) => {
+      const p = fs - i * 2; let label, color, w, tc = '#f4f0e8';
+      if (fs >= 13 + i){ label = 'Approved by André'; color = '#7fd1a0'; w = '100%'; approved++; }
+      else if (p < 0){ label = 'Queued'; color = '#8088a3'; w = '0%'; tc = '#8088a3'; }
+      else if (p < 2){ label = 'Picked up'; color = '#c7c9d6'; w = '12%'; }
+      else if (p < 5){ label = 'Writing the code'; color = A; w = (32 + (p - 2) * 26) + '%'; }
+      else { label = 'Handed in for review'; color = '#f4f0e8'; w = '100%'; waiting++; }
+      el.querySelector('.t').style.color = tc; const s = el.querySelector('.s'); s.textContent = label; s.style.color = color;
+      const b = el.querySelector('.bar i'); b.style.width = w; b.style.background = color;
+    });
+    $('fclock').textContent = FCLOCK[fs]; $('fwho').textContent = fs >= 13 ? 'André is reviewing' : 'Overnight';
+    $('ffoot').textContent = approved === 4 ? 'All four approved' : (waiting ? waiting + ' waiting for review' : 'Nothing to review yet') + (approved ? ' · ' + approved + ' approved' : '');
+  }
+
+  /* ---------- GoodInGoodOut ---------- */
+  const MEALS = [
+    { text: 'Two eggs, buttered toast and a flat white', items: [['Eggs × 2',156],['Toast, 1 slice',95],['Butter, 1 tsp',35],['Flat white',120]] },
+    { text: 'Chicken rice, a side of greens and an iced lemon tea', items: [['Chicken rice, 1 plate',600],['Stir-fried greens',90],['Iced lemon tea',110]] },
+    { text: 'A handful of almonds and a banana', items: [['Almonds, 30 g',174],['Banana',105]] }
+  ];
+  let meal = 0, mealStart = 0, T = 0;
+  const mealBtns = [...$('meals').children];
+  mealBtns.forEach((b, i) => b.onclick = () => { meal = i; mealStart = T; renderMeal(); gigo(T); });
+  function renderMeal(){
+    mealBtns.forEach((b, i) => b.setAttribute('aria-pressed', i === meal));
+    $('gitems').innerHTML = MEALS[meal].items.map(([n,k]) => `<div class="item"><span>${n}</span><span>${k} kcal</span></div>`).join('');
+    $('gmeal').textContent = MEALS[meal].items.reduce((a, it) => a + it[1], 0);
+  }
+  function gigo(t){
+    const m = MEALS[meal], words = m.text.split(' '), gs = reduce ? 99 : t - mealStart;
+    const steps = Math.ceil(words.length / 2), shown = Math.max(0, Math.min(m.items.length, gs - steps));
+    $('gtyped').textContent = words.slice(0, Math.min(words.length, (gs + 1) * 2)).join(' ');
+    $('caret').style.opacity = gs < steps ? 1 : 0;
+    [...$('gitems').children].forEach((el, i) => { el.style.opacity = i < shown ? 1 : 0; el.style.transform = i < shown ? 'none' : 'translateY(8px)'; });
+    $('gtotal').textContent = m.items.slice(0, shown).reduce((a, it) => a + it[1], 0);
+    $('glogged').style.opacity = gs - steps >= m.items.length ? 1 : 0;
+    if (!reduce && gs > steps + m.items.length + 6){ meal = (meal + 1) % MEALS.length; mealStart = t; renderMeal(); }
+  }
+
+  /* ---------- dashboard ---------- */
+  [34,38,36,42,40,46,44,50,47,52,56,53,58,62,60,66,63,70,74,71,78,82,80,88].forEach(h => { const i = document.createElement('i'); i.style.height = h + '%'; $('bars').appendChild(i); });
+  const SOURCES = [['Bank accounts',22],['Brokerage',31],['Exchanges',14],['Wallets',12],['Onchain positions',21]];
+  $('sources').innerHTML = SOURCES.map(([n,s]) => `<div class="src"><b>${n}</b><span class="share"><i style="width:${s*3}%"></i></span><em>Live</em></div>`).join('');
+  const srcEls = [...$('sources').children];
+  function dash(t){ const di = reduce ? -1 : t % 12; srcEls.forEach((el, i) => { const on = di === i * 2; el.classList.toggle('sync', on); el.querySelector('em').textContent = on ? 'Updating' : 'Live'; }); }
+
+  /* ---------- video takes (abstract stills) ---------- */
+  const FRAMES = [
+    ['6.1','Flat lighting',0,'linear-gradient(#cfd2d4,#c3c6c6 58%,#b4b6b1 58%,#aeb0aa)','filter:saturate(.25) brightness(1.08)', '<i style="position:absolute;left:46%;bottom:34%;width:9%;height:30%;background:#9a9c98;border-radius:40% 40% 0 0"></i>'],
+    ['8.8','Strong opening',1,'linear-gradient(#20305a,#c86f4a 62%,#2a1e22 62%,#140f12)','', '<i style="position:absolute;left:58%;top:40%;width:13%;aspect-ratio:1;border-radius:50%;background:#ffd08a;box-shadow:0 0 24px 6px rgba(255,190,110,.6)"></i><i style="position:absolute;left:22%;bottom:38%;width:6%;height:26%;background:#120c0e;border-radius:40% 40% 0 0"></i>'],
+    ['4.2','Subject drifts off frame',0,'linear-gradient(#5c7d8f,#9fb3b6 60%,#4a5a50 60%,#3a463e)','', '<i style="position:absolute;right:-5%;bottom:38%;width:10%;height:34%;background:#1c2420;border-radius:40% 40% 0 0"></i>'],
+    ['9.3','Best take',1,'linear-gradient(#0e1a3a,#3b3f7a 45%,#e0875a 66%,#1a1416 66%)','', '<i style="position:absolute;left:0;right:0;bottom:34%;height:3%;background:rgba(255,200,140,.55)"></i><i style="position:absolute;left:40%;bottom:34%;width:7%;height:30%;background:#0c0a0c;border-radius:40% 40% 0 0"></i><i style="position:absolute;left:30%;top:22%;width:2%;aspect-ratio:1;border-radius:50%;background:#fff"></i>'],
+    ['7.0','Pacing drags',0,'linear-gradient(#2f4a3e,#6f8d6a 55%,#2b3a2a 55%)','', '<i style="position:absolute;left:12%;right:12%;bottom:30%;height:22%;background:#1f2a1e;border-radius:50% 50% 0 0"></i>'],
+    ['5.4','Soft focus',0,'linear-gradient(#7b5a8c,#d79b7c 60%,#4a3240 60%)','filter:blur(3px)', '<i style="position:absolute;left:44%;top:30%;width:14%;aspect-ratio:1;border-radius:50%;background:#ffe2b8"></i>']
+  ];
+  $('takes').innerHTML = FRAMES.map((f, i) => `<div class="takewrap"><div class="frame"><div class="still"><div class="sc" style="background:${f[3]};${f[4]}">${f[5]}</div><small>Take ${pad(i+1)}</small><span class="score">${f[0]}</span><span class="veil"></span><span class="strike"></span></div><span class="ring"></span></div><div class="note"><span></span><span></span></div></div>`).join('');
+  const takeEls = [...$('takes').children];
+  function vid(t){
+    const vs = reduce ? 99 : t % 12; let kept = 0, cut = 0, seen = 0;
+    takeEls.forEach((el, i) => {
+      const f = FRAMES[i], done = vs > i, watching = vs === i;
+      if (done){ seen++; f[2] ? kept++ : cut++; }
+      el.querySelector('.score').style.opacity = done ? 1 : 0;
+      el.querySelector('.ring').style.opacity = done && f[2] ? 1 : 0;
+      el.querySelector('.strike').style.opacity = done && !f[2] ? 1 : 0;
+      el.querySelector('.veil').style.opacity = done && !f[2] ? .55 : 0;
+      const n = el.querySelectorAll('.note span'); n[0].textContent = done ? f[1] : (watching ? 'Critic is watching' : 'Waiting'); n[1].textContent = done ? (f[2] ? 'Kept' : 'Cut') : '';
+    });
+    $('vsum').textContent = seen < 6 ? `Reviewing take ${pad(Math.min(6, seen + 1))} of 06` : `${kept} kept · ${cut} cut`;
+  }
+
+  /* ---------- Ask my agent (pre-written answers only) ---------- */
+  const QA = [
+    ["What is The Forge?", "The Forge is André's AI engineer. It works around the clock: it picks up tasks, writes the code and hands it in for his review. Some of his own products are partly maintained by it."],
+    ["What is he building right now?", "Mostly AI agents that do real work unattended: an AI engineer, a calorie tracker you talk to, a dashboard that pulls his whole financial portfolio into one view, and a video studio with an AI critic. A few more stay private."],
+    ["What does André do day to day?", "He's a senior product manager working on onchain finance in Hong Kong. He turns research into roadmaps, runs teams across frontend, backend, smart contracts and design, and increasingly prototypes with AI before anything reaches engineering."],
+    ["How does he use AI at work?", "Spec first, then agents. He writes the requirements and the checks, and AI coding agents build against them. He also uses AI for fast research: competitive analyses, data catalogues and onchain investigations that used to take weeks."],
+    ["What has he built in crypto?", "Chakra Pool (US$18 million+ in deposits), HeliSwap (a US$2.5 million Hedera Foundation grant and US$7 million+ in deposits), Sherpa Stake (an EVM staking platform he built, with US$1 billion+ in tokens at peak), LuckyStake (a staking app on MANTRA Chain, now retired), 7,000+ developers onboarded through a developer course he created, and US$14,000+ in ETHGlobal hackathon prizes. He also led RWAccelerator with Google Cloud: 150+ startups applied, and he picked 7 and took them to launch."],
+    ["Where did he study?", "WU Vienna (top 10%), then a double master's at London Business School and Fudan in Shanghai, with an exchange semester at the University of Hong Kong. He speaks German and Mandarin natively."],
+    ["How can I reach him?", "LinkedIn is the only contact on this site: linkedin.com/in/andre-ringdorfer. Send him a message there.", true],
+    ["Is this chat a real AI?", "Not quite. Every answer here was written and approved by André, so nothing is made up. The real AI is in the projects above."]
+  ];
+  const FALLBACK = "I only give answers André has approved, and I don't have one for that yet. Try one of the questions below, or ask him on LinkedIn.";
+  const RULES = [[/forge/,0],[/real ai|chat ?bot|\bbot\b|gpt|llm|are you|is this/,7],[/reach|contact|e-?mail|linkedin|hire|hiring|get in touch|message|call him/,6],[/stud|universit|school|degree|educat|language|speak|fudan|vienna|\blbs\b/,5],[/crypto|defi|chakra|heliswap|sherpa|lucky|mantra|hackathon|web3|blockchain|staking|tvl|accelerator/,4],[/ai at work|use ai|uses ai|workflow|spec|research|how does he work/,3],[/day to day|job|role|product manager|\bpm\b|for a living|career/,2],[/build|project|working on|right now|current|calorie|dashboard|video|portfolio/,1]];
+  const log = $('log'), term = $('term'); let busy = false;
+  const scroll = () => log.scrollTop = log.scrollHeight;
+  function msg(cls, text){ const d = document.createElement('div'); d.className = 'm ' + cls; d.textContent = text; log.appendChild(d); scroll(); return d; }
+  function reply(text, link){
+    busy = true; term.classList.add('busy');
+    const d = msg('a think', 'thinking'); d.insertAdjacentHTML('beforeend', '<i>.</i><i>.</i><i>.</i>');
+    const finish = () => { if (link){ const a = document.createElement('a'); a.href = 'https://www.linkedin.com/in/andre-ringdorfer/'; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'linkedin.com/in/andre-ringdorfer'; d.appendChild(a); } scroll(); busy = false; term.classList.remove('busy'); };
+    setTimeout(() => {
+      d.className = 'm a'; d.textContent = '';
+      if (reduce){ d.textContent = text; return finish(); }
+      let i = 0;
+      const step = () => { i = Math.min(text.length, i + 1 + (Math.random() * 3 | 0)); d.textContent = text.slice(0, i); scroll(); if (i < text.length) setTimeout(step, 14 + Math.random() * 22); else finish(); };
+      step();
+    }, reduce ? 300 : 1100 + Math.random() * 1300 + Math.min(text.length * 6, 900));
+  }
+  function ask(q, a, link){ if (busy) return; msg('q', q); reply(a, link); }
+  QA.forEach(([q, a, l]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = q; b.onclick = () => ask(q, a, l); $('qs').appendChild(b); });
+  $('askf').addEventListener('submit', e => {
+    e.preventDefault(); const v = $('q').value.trim(); if (!v || busy) return; $('q').value = '';
+    const hit = RULES.find(r => r[0].test(v.toLowerCase()));
+    hit ? ask(v, QA[hit[1]][1], QA[hit[1]][2]) : ask(v, FALLBACK, true);
   });
 
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function loop(ts){ draw(ts||0); if (!reduce) requestAnimationFrame(loop); }
-  addEventListener('resize', () => { layout(); draw(0); });
-  tick(); layout(); loop(0); setInterval(()=>{ tick(); if (reduce) draw(0); }, 1000);
+  /* ---------- agent traces (illustrative activity) ---------- */
+  const ACTS = [
+    ['writing the code','handed a change in for review','picking up the next task','fixing a bug'],
+    ['logging lunch, 800 kcal','itemising a breakfast','adding up today','logging an iced lemon tea'],
+    ['refreshing five sources','pulling in wallet balances','updating positions','reconciling exchanges'],
+    ['scoring take 04: kept','sending take 05 back','rendering take 07','critic watching take 06']
+  ];
+  const lanesEl = [...document.querySelectorAll('.rig .lane')];
+  const L = lanesEl.map((el, i) => ({ el, cv: el.querySelector('canvas'), sp: el.querySelector('span'), pts: [], burst: 0, amp: 0, ph: Math.random()*9, k: 0 }));
+  L.forEach((l, i) => l.sp.textContent = ACTS[i][0]);
+  let inkCol = '#0d1220', accCol = '#f2a73b';
+  function readCols(){ const cs = getComputedStyle($('hero')); inkCol = cs.getPropertyValue('--h-ink').trim() || inkCol; accCol = cs.getPropertyValue('--accent').trim() || accCol; }
+  function sizeLanes(){ L.forEach(l => { const r = l.cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); l.w = r.width; l.h = r.height; l.cv.width = r.width * d; l.cv.height = r.height * d; l.ctx = l.cv.getContext('2d'); l.ctx.setTransform(d,0,0,d,0,0); }); }
+  const STEP = 3;
+  function sample(l, t){
+    l.ph += .09;
+    const target = l.burst > 0 ? 1 : 0; l.amp += (target - l.amp) * .08;
+    const calm = Math.sin(l.ph) * 1.2 + Math.sin(l.ph * 2.7) * .6;
+    const busy = (Math.sin(l.ph * 3.1) * .6 + Math.sin(l.ph * 7.3) * .3 + (Math.random() - .5) * .9) * (l.h * .38);
+    return { y: l.h / 2 + calm + busy * l.amp, hot: l.amp > .25 };
+  }
+  function drawLane(l){
+    const c = l.ctx; if (!c) return; c.clearRect(0, 0, l.w, l.h);
+    const n = l.pts.length, x0 = l.w - 8 - (n - 1) * STEP;
+    c.lineWidth = 1.3; c.lineJoin = 'round';
+    for (let i = 1; i < n; i++){
+      c.strokeStyle = l.pts[i].hot ? accCol : inkCol; c.globalAlpha = l.pts[i].hot ? 1 : .55 * Math.min(1, i / 30 + .25);
+      c.beginPath(); c.moveTo(x0 + (i - 1) * STEP, l.pts[i - 1].y); c.lineTo(x0 + i * STEP, l.pts[i].y); c.stroke();
+    }
+    c.globalAlpha = 1; const last = l.pts[n - 1];
+    if (last){ c.fillStyle = last.hot ? accCol : inkCol; c.beginPath(); c.arc(x0 + (n - 1) * STEP, last.y, last.hot ? 3.4 : 2.4, 0, 7); c.fill(); }
+  }
+  function fillLanes(){ L.forEach(l => { l.pts = []; const max = Math.ceil((l.w - 8) / STEP); for (let i = 0; i < max; i++){ if (Math.random() < .015) l.burst = 20; if (l.burst > 0) l.burst--; l.pts.push(sample(l)); } l.burst = 0; l.amp = 0; drawLane(l); }); }
+  let laneWho = 0, paceT = null;
+  function setPace(){ if (reduce) return; clearInterval(paceT); paceT = setInterval(laneAct, night ? 1100 : 2400); }
+  window.setPace = setPace;
+  function laneAct(){
+    const i = laneWho++ % 4, l = L[i]; l.k = (l.k + 1) % ACTS[i].length; l.burst = 42;
+    l.sp.classList.add('out'); setTimeout(() => { l.sp.textContent = ACTS[i][l.k]; l.sp.classList.remove('out'); }, 350);
+  }
+  readCols(); sizeLanes(); fillLanes();
+  if (!reduce){
+    setInterval(() => { L.forEach(l => { if (l.burst > 0) l.burst--; l.pts.push(sample(l)); const max = Math.ceil((l.w - 8) / STEP); while (l.pts.length > max) l.pts.shift(); drawLane(l); }); }, 50);
+    setPace();
+  }
+  addEventListener('resize', () => { sizeLanes(); fillLanes(); });
+  $('flip').addEventListener('click', () => setTimeout(() => { readCols(); L.forEach(drawLane); }, 50));
+
+  /* ---------- go ---------- */
+  renderMeal(); setScene(); playSubs(); tick();
+  const frame = () => { forge(T); gigo(T); dash(T); vid(T); };
+  frame();
+  setInterval(tick, 1000);
+  if (!reduce) setInterval(() => { T++; frame(); }, 700);
 })();
 </script>
 </body>

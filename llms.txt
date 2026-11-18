@@ -1,35 +1,42 @@
 # André Ringdorfer (苏文)
 
-> Product manager in Hong Kong who builds AI agents and products, with a track record in onchain finance and a background in strategy consulting.
+> Senior product manager in onchain finance, based in Hong Kong. He runs a team of AI agents from a Raspberry Pi that keep working around the clock. Before AI, he shipped crypto products. Before crypto, he worked in strategy consulting and corporate strategy across Europe and Asia.
+
+Pages:
+- [AI work](https://andre-ringdorfer.com/): the AI agents and projects.
+- [Experience](https://andre-ringdorfer.com/experience.html): results, work history, education and languages.
 
 ## AI work
-- Forge: three self-hosted AI agents on a Raspberry Pi 5 (autonomous coding on a schedule, inbox-to-Telegram alerts, general requests). It has merged pull requests on its own.
-- GoodInGoodOut: an AI calorie tracker. The Telegram bot is live; the iOS app is in development.
-- Form D Oracle: an agent that hashes SEC Form D filings and anchors them onchain for verification (demo).
-- AI video pipeline: open-source video generation with an AI judge-and-retry loop (in progress).
-- Keepr: an AI personal CRM over Telegram.
-- AEO toolkit: audits and rewrites that make websites readable by AI answer engines.
+- The Forge: an AI engineer that works around the clock. It picks up tasks, writes the code and hands it in for review. Some of André's own products are partly maintained by it.
+- GoodInGoodOut: a calorie tracker you talk to. Describe a meal and it logs every part of it. The iOS app is on its way.
+- Portfolio dashboard: every account, wallet and position, pulled in automatically and aggregated into one live dashboard.
+- AI video studio: generates video, then a second AI critiques every clip. Only the best takes make the cut.
+- Smaller projects: Keepr (a personal CRM you text), AEO toolkit (makes websites readable by AI answer engines), Build-your-Bob (the shared framework behind his bots), Date Doctor, Polymarket monitor, DoomDraft.
 
-## Crypto track record
-- Chakra Pool: onchain yield vaults, $18M+ liquidity.
-- HeliSwap: Hedera's first native DEX, $2.5M Hedera Foundation grant, $7M+ TVL.
-- Sherpa Stake: staking platform, $1B+ in tokens at peak.
-- Developer course with Metaschool: 7,000+ developers.
-- RWAccelerator with Google Cloud: 7 projects selected from 150+.
-- ETHGlobal hackathon prizes: $14K+.
+## Strongest results (US dollars)
+- Sherpa Stake: a staking platform he built; over US$1 billion in tokens staked at its peak.
+- Chakra Pool: savings vaults he built and scaled; US$18 million+ deposited.
+- HeliSwap: Hedera's first native crypto exchange, which he led; US$7 million+ in deposits within months, and a US$2.5 million Hedera Foundation grant he secured.
+- Developer course with Metaschool: 7,000+ developers onboarded to MANTRA Chain.
+- RWAccelerator with Google Cloud: founded and led it; picked 7 startups from 150+ applicants and took them to launch.
+- ETHGlobal hackathons: US$14,000+ in prizes.
 
 ## Experience
-- 2022–now: Senior Product Manager, Tectonic Consulting (client: MANTRA Chain), Hong Kong
-- 2022–2025: Senior Manager, Product & Strategy, HeliSwap (MANTRA joint venture)
-- 2020–2022: APAC Management Associate, ASSA ABLOY
+- 2022–now: Senior Product Manager, Techtonic Consulting, for MANTRA Chain, Hong Kong
+- 2022–2025: Senior Manager, Product & Strategy, HeliSwap (a MANTRA joint venture), Hong Kong
+- 2020–2022: APAC Management Associate, ASSA ABLOY, Asia Pacific
 - 2020: Strategy Consulting, Arthur D. Little, Vienna
 - 2019–2020: Strategic Project Management, PayPal, London
 - 2019: Research Assistant, United Nations ESCAP, Bangkok
 
 ## Education
-- MSc International Business, Fudan School of Management
-- MSc International Management, London Business School
-- BSc International Business Administration (top 10%), WU Vienna
+- 2018–2019: MSc International Business, Fudan School of Management, Shanghai (double degree with LBS)
+- 2017–2018: MSc International Management, London Business School
+- 2016: Exchange semester, The University of Hong Kong
+- 2013–2017: BSc International Business Administration, WU Vienna (top 10%)
+
+## Languages
+German and Mandarin (native), English (fluent), Russian (conversational), French (basic)
 
 ## Contact
-- LinkedIn: https://www.linkedin.com/in/andre-ringdorfer/
+- LinkedIn only: https://www.linkedin.com/in/andre-ringdorfer/
