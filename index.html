@@ -4,70 +4,122 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>André Ringdorfer</title>
-<meta name="description" content="André Ringdorfer builds AI agents and products in Hong Kong, with a track record in onchain finance.">
+<meta name="description" content="André Ringdorfer runs a team of AI agents from a Raspberry Pi in Hong Kong. They ship code while he sleeps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
-/* Layout: one quiet left-aligned column, like a well-kept engineering notebook. The headline carries the weight; everything else is plain rows. */
+/* Concept: the page runs on Hong Kong time. By day André works; at night his agents take the shift.
+   The sky, the skyline's lit windows and the hero copy follow the real hour. Below the fold: each AI project drawn as the flow it actually runs. */
 :root{
-  --bg:#F7F7F5; --fg:#17191C; --muted:#61666D; --rule:#DFE1DE; --link:#1F4FA8; --live:#2F7D4F;
-  --sans:'IBM Plex Sans',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --display:'Bricolage Grotesque','Instrument Sans',system-ui,sans-serif;
+  --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  /* day */
+  --bg:#F3F5F6; --ink:#101521; --muted:#5B6474; --rule:#D9DEE5; --card:#FFFFFF; --accent:#1F4FD8; --lamp:#F2A93B;
+  --sky-a:#BFD6EA; --sky-b:#EEF3F6; --tower:#2B3448; --tower-2:#3D4860;
+  color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121416;--fg:#E6E8EA;--muted:#979DA4;--rule:#2A2E32;--link:#8DB0F2;--live:#6FC892;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#121416;--fg:#E6E8EA;--muted:#979DA4;--rule:#2A2E32;--link:#8DB0F2;--live:#6FC892;color-scheme:dark}
-
-body{background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.page{max-width:700px;margin:0 auto;padding-block:72px 56px;display:flex;flex-direction:column;gap:72px}
-a{color:var(--link);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+body.night{
+  --bg:#0B1020; --ink:#E7EAF4; --muted:#98A2BE; --rule:#232B45; --card:#121933; --accent:#9DB4FF; --lamp:#FFC46B;
+  --sky-a:#050816; --sky-b:#1A2346; --tower:#0A0F1F; --tower-2:#121a33;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;transition:background .8s,color .8s}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{text-decoration-thickness:2px}
-a:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:2px}
-p{margin:0;max-width:62ch}
-h2{margin:0 0 20px;font-size:14px;font-weight:600;color:var(--muted)}
-.meta{font-family:var(--mono);font-size:13px;color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.01em}
+.muted{color:var(--muted)}
 
-header{display:flex;flex-direction:column;gap:28px}
-.who{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px}
-.name{font-size:17px;font-weight:600;margin:0}
-.name span{font-weight:400;color:var(--muted);margin-left:6px}
-.lede{font-size:clamp(28px,5.2vw,42px);line-height:1.18;letter-spacing:-.018em;font-weight:500;margin:0;text-wrap:balance;max-width:20ch}
-.about{display:flex;flex-direction:column;gap:14px;color:var(--fg)}
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;color:var(--ink)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:48px;align-items:start;padding-block:28px 300px}
+.top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.top b{font-weight:600}
+.top .zh{color:var(--muted);margin-left:8px;font-weight:400}
+.clock{font-family:var(--mono);font-size:14px;display:inline-flex;gap:10px;align-items:center;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--card) 70%,transparent);border:1px solid var(--rule);backdrop-filter:blur(6px)}
+.clock i{width:8px;height:8px;border-radius:50%;background:var(--lamp);box-shadow:0 0 10px var(--lamp)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6.4vw,84px);line-height:.98;letter-spacing:-.035em;margin:56px 0 24px;text-wrap:balance}
+h1 em{font-style:normal;font-weight:400}
+.lede{font-size:clamp(18px,1.6vw,21px);max-width:34ch;margin:0 0 28px;color:var(--ink);opacity:.86}
+.switch{font:500 15px var(--sans);color:var(--ink);background:color-mix(in srgb,var(--card) 80%,transparent);border:1px solid var(--rule);border-radius:999px;padding:10px 18px;cursor:pointer;backdrop-filter:blur(6px)}
+.switch:hover{border-color:var(--ink)}
 
-.rows{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
-.rows>li{border-bottom:1px solid var(--rule);padding-block:20px;display:grid;grid-template-columns:1fr auto;gap:4px 24px}
-.rows h3{margin:0;font-size:17px;font-weight:600}
-.rows p{grid-column:1/-1;color:var(--fg)}
-.rows .proof{color:var(--muted);font-size:15px}
-.status{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;align-self:baseline}
-.status.live{color:var(--live)}
-.status.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:1px}
+/* the Pi panel */
+.pi{margin-top:72px;background:color-mix(in srgb,var(--card) 82%,transparent);border:1px solid var(--rule);border-radius:14px;padding:18px;backdrop-filter:blur(10px);box-shadow:0 20px 50px -30px rgba(0,0,0,.45)}
+.pi header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.pi header b{font-family:var(--display);font-weight:600;font-size:18px}
+.agent{display:grid;grid-template-columns:auto 1fr auto;gap:2px 12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)}
+.agent .dot{width:9px;height:9px;border-radius:50%;background:var(--muted);align-self:center}
+.agent.on .dot{background:var(--lamp);box-shadow:0 0 0 4px color-mix(in srgb,var(--lamp) 25%,transparent)}
+.agent b{font-weight:600}
+.agent span.role{grid-column:2/4;color:var(--muted);font-size:14px}
+.agent .st{font-family:var(--mono);font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.agent.on .st{color:var(--ink)}
+.pi .note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
 
-.lab{margin-top:24px;color:var(--muted);font-size:15px}
-.lab b{color:var(--fg);font-weight:500}
+/* ---------- sections ---------- */
+section{padding-block:96px 0}
+.h2{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:36px}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.4vw,56px);letter-spacing:-.03em;line-height:1;margin:0}
+.h2 p{margin:0;max-width:40ch;color:var(--muted)}
 
-.how{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
-.how b{font-weight:600}
+.proj{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:32px;padding:32px 0;border-top:1px solid var(--rule)}
+.proj h3{font-family:var(--display);font-weight:600;font-size:28px;letter-spacing:-.02em;margin:0 0 6px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.tag{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--muted);border:1px solid var(--rule);border-radius:999px;padding:2px 10px;letter-spacing:0}
+.tag.live{color:var(--ink);border-color:var(--lamp)}
+.proj p{margin:0 0 10px;max-width:52ch}
+.proj .proof{color:var(--muted);font-size:15px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;align-self:center;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px}
+.flow .n{font-family:var(--mono);font-size:12.5px;padding:7px 11px;border-radius:8px;border:1px solid var(--rule);background:var(--bg);white-space:nowrap}
+.flow .n.ai{border-color:var(--accent);color:var(--accent)}
+.flow .n.out{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.flow .a{color:var(--muted);font-family:var(--mono)}
+.flow .br{display:flex;flex-direction:column;gap:6px}
+.flow small{flex-basis:100%;font-size:12.5px;color:var(--muted);margin-top:4px}
 
-table{width:100%;border-collapse:collapse;font-size:16px}
-td{padding:12px 0;border-bottom:1px solid var(--rule);vertical-align:baseline}
-tr:first-child td{border-top:1px solid var(--rule)}
-td.n{text-align:right;font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:20px}
-td .sub{display:block;color:var(--muted);font-size:14px}
-td.y{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap;width:118px;font-variant-numeric:tabular-nums}
+.lab{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:8px}
+.lab div{border:1px solid var(--rule);border-radius:12px;padding:16px;background:var(--card)}
+.lab b{display:block;font-weight:600;margin-bottom:2px}
+.lab span{color:var(--muted);font-size:15px}
 
-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;border-top:1px solid var(--rule);padding-top:20px}
-@media (max-width:560px){
-  .page{padding-block:44px 40px;gap:56px}
-  td.y{display:block;width:auto;padding:12px 0 0;border:0}
-  tr td.y + td{display:block;padding-top:2px}
-  tr:first-child td{border-top:0}
-  .edu tr:first-child, .exp tr:first-child{border-top:1px solid var(--rule)}
-  .exp tr,.edu tr{display:block;border-bottom:1px solid var(--rule)}
-  .exp td,.edu td{border:0}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.how h3{font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:-.015em;margin:0 0 8px}
+.how p{margin:0;color:var(--muted)}
+
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--rule)}
+.fig{padding:24px 20px 24px 0;border-bottom:1px solid var(--rule)}
+.fig b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(30px,3.4vw,44px);letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.fig span{display:block;font-weight:500;margin-top:6px}
+.fig small{display:block;color:var(--muted);font-size:14px}
+
+.cv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
+.cv h3{font-size:14px;font-weight:600;color:var(--muted);margin:0 0 12px}
+.cv ol{list-style:none;margin:0;padding:0}
+.cv li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;padding:11px 0;border-top:1px solid var(--rule)}
+.cv li .y{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.cv li small{display:block;color:var(--muted);font-size:14px}
+
+footer{margin-top:110px;border-top:1px solid var(--rule)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-block:28px 40px}
+.big{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,48px);letter-spacing:-.03em;line-height:1.05;margin:0 0 10px}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;gap:0;padding-block:20px 230px}
+  h1{margin-top:40px}
+  .pi{margin-top:36px}
+  .proj{grid-template-columns:1fr;gap:18px}
+  .lab,.how{grid-template-columns:1fr}
+  .figs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cv{grid-template-columns:1fr;gap:36px}
+  section{padding-block:72px 0}
 }
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <link rel="canonical" href="https://andre-ringdorfer.com/">
 <link rel="alternate" type="text/plain" href="/llms.txt">
@@ -77,104 +129,232 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;b
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"André Ringdorfer","alternateName":"苏文","url":"https://andre-ringdorfer.com/","jobTitle":"Senior Product Manager","address":{"@type":"PostalAddress","addressLocality":"Hong Kong"},"knowsAbout":["AI agents","LLM applications","Product management","DeFi","Blockchain"],"knowsLanguage":["de","zh","en","ru","fr"],"alumniOf":["WU Vienna University of Economics and Business","London Business School","Fudan University School of Management"],"sameAs":["https://www.linkedin.com/in/andre-ringdorfer/","https://github.com/ringman007"]}</script>
 </head>
 <body>
-<div class="page">
-  <header>
-    <div class="who">
-      <p class="name">André Ringdorfer<span lang="zh">苏文</span></p>
-      <span class="meta">Hong Kong · <a href="https://www.linkedin.com/in/andre-ringdorfer/" target="_blank" rel="noopener">LinkedIn</a></span>
+<header class="hero" id="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="top">
+      <span><b>André Ringdorfer</b><span class="zh" lang="zh">苏文</span></span>
+      <span class="clock" aria-live="polite"><i></i><span id="clock">Hong Kong</span></span>
     </div>
-    <h1 class="lede">I run a team of AI agents from a Raspberry Pi. They ship code while I sleep.</h1>
-    <div class="about">
-      <p>I'm a product manager in Hong Kong, and I build with AI every day. At work I lead product on onchain finance. Outside work I run my own AI agents, apps and research tools, and some of them now write and ship code by themselves.</p>
-      <p>My background is strategy. I studied business in Vienna, London and Shanghai, then worked at the UN in Bangkok, PayPal in London, Arthur D. Little in Vienna and ASSA ABLOY across Asia.</p>
+    <div>
+      <h1 id="h1">I run a team of AI agents from a Raspberry&nbsp;Pi.</h1>
+      <p class="lede" id="lede">By day I build products in onchain finance. When I log off, my agents take the night shift and ship code while I sleep.</p>
+      <button class="switch" id="switch" type="button">See the night shift</button>
     </div>
-  </header>
+    <aside class="pi" aria-label="Agents running on the Raspberry Pi">
+      <header><b>On the Pi right now</b><span class="mono muted">Raspberry Pi 5</span></header>
+      <div class="agent on"><span class="dot"></span><b>Forge</b><span class="st" id="forge">next run 00:00</span><span class="role">Coding agent. Picks up issues, opens pull requests, reports on Telegram.</span></div>
+      <div class="agent on"><span class="dot"></span><b>Hooks</b><span class="st">watching inbox</span><span class="role">Turns important email into Telegram alerts.</span></div>
+      <div class="agent on"><span class="dot"></span><b>Main</b><span class="st">listening</span><span class="role">Takes requests from my phone, from anywhere.</span></div>
+      <p class="note">The countdown follows Forge's real 30-minute schedule, in Hong Kong time.</p>
+    </aside>
+  </div>
+</header>
 
+<main class="wrap">
   <section aria-labelledby="ai">
-    <h2 id="ai">AI work</h2>
-    <ul class="rows">
-      <li>
-        <h3>Forge</h3><span class="status live">Running</span>
-        <p>Three AI agents on a Raspberry Pi 5. One writes code on a 30-minute schedule and reports to me on Telegram, one turns my inbox into Telegram alerts, and one takes general requests from my phone.</p>
+    <div class="h2"><h2 id="ai">What I build with AI</h2><p>Each one is drawn as the flow it actually runs.</p></div>
+
+    <article class="proj">
+      <div>
+        <h3>Forge <span class="tag live">running</span></h3>
+        <p>My self-hosted agent stack. Three agents on a Raspberry Pi 5, reachable from my phone anywhere over a private network.</p>
         <p class="proof">It has merged six pull requests into Keepr on its own. I found and patched two bugs in the API proxy it runs on.</p>
-      </li>
-      <li>
-        <h3>GoodInGoodOut</h3><span class="status live">Bot live · iOS app in build</span>
-        <p>A calorie tracker you talk to. Describe a meal and it itemises every part of it, checking a cache of known foods, then the USDA database, then Claude.</p>
+      </div>
+      <div class="flow" aria-label="Forge flow">
+        <span class="n">every 30 min</span><span class="a">→</span><span class="n ai">Forge reads the repo</span><span class="a">→</span><span class="n ai">writes the change</span><span class="a">→</span><span class="n out">pull request</span><span class="a">→</span><span class="n">Telegram report</span>
+        <small>Gmail → Hooks → Telegram runs alongside it, and Main answers whatever I send from my phone.</small>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div>
+        <h3>GoodInGoodOut <span class="tag live">bot live</span><span class="tag">iOS in build</span></h3>
+        <p>A calorie tracker you just talk to. Describe a meal and it itemises every part of it.</p>
         <p class="proof">I use the Telegram bot every day. The iOS app is being built against a 65-item requirements matrix.</p>
-      </li>
-      <li>
-        <h3>Form D Oracle</h3><span class="status">Demo</span>
-        <p>An agent that pulls SEC Form D filings, hashes them and records them on a blockchain, so anyone can check in the browser that a document hasn't changed.</p>
-        <p class="proof">Next: an identity for the agent itself, and signed receipts for every decision it makes.</p>
-      </li>
-      <li>
-        <h3>AI video pipeline</h3><span class="status">In progress</span>
-        <p>Open-source video generation running on a rented RTX 5090, with a second model that judges each clip and sends weak ones back for another take.</p>
-      </li>
-      <li>
-        <h3>Keepr</h3><span class="status">Built</span>
-        <p>A personal CRM you message in plain language, like "just met Jeremy, catch up in four weeks". It reminds you when it's time.</p>
-        <p class="proof">Forge maintains part of its code.</p>
-      </li>
-      <li>
-        <h3>AEO toolkit</h3><span class="status">In use</span>
-        <p>A kit for making websites readable by AI answer engines such as ChatGPT and Perplexity: a 20-question audit, rewrite patterns and llms.txt guides.</p>
-        <p class="proof">Used for client audits and for the llms.txt of a live trading product.</p>
-      </li>
-    </ul>
-    <p class="lab">Smaller builds: <b>Date Doctor</b>, date ideas from both partners' preferences. <b>Capital Cards</b>, a world-capitals game. <b>Build-your-Bob</b>, the shared framework behind my bots. <b>Polymarket monitor</b>, live markets checked against breaking news. <b>DoomDraft</b>, an endless AI feed in any brand's voice.</p>
+      </div>
+      <div class="flow" aria-label="GoodInGoodOut flow">
+        <span class="n">"two eggs, toast, flat white"</span><span class="a">→</span><span class="n">known-foods cache</span><span class="a">→</span><span class="n">USDA database</span><span class="a">→</span><span class="n ai">Claude</span><span class="a">→</span><span class="n out">itemised log</span>
+        <small>The cheapest reliable source answers first. The model only fills the gaps.</small>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div>
+        <h3>Form D Oracle <span class="tag">demo</span></h3>
+        <p>An autonomous agent that records SEC filings onchain, so anyone can prove a document hasn't been changed.</p>
+        <p class="proof">Next: an identity for the agent itself and a signed receipt for every decision it makes.</p>
+      </div>
+      <div class="flow" aria-label="Form D Oracle flow">
+        <span class="n">SEC EDGAR</span><span class="a">→</span><span class="n ai">agent fetches Form D</span><span class="a">→</span><span class="n">hash</span><span class="a">→</span><span class="n out">anchored onchain</span><span class="a">→</span><span class="n">verify in browser</span>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div>
+        <h3>AI video pipeline <span class="tag">in progress</span></h3>
+        <p>Open-source video generation with a second model as the critic. Weak clips get sent back for another take.</p>
+      </div>
+      <div class="flow" aria-label="Video pipeline flow">
+        <span class="n">radar</span><span class="a">→</span><span class="n ai">ideation</span><span class="a">→</span><span class="n">render · Wan 2.2 · RTX 5090</span><span class="a">→</span><span class="n ai">AI judge</span><span class="a">→</span><span class="n out">publish</span>
+        <small>Rejected clips loop back to render with the judge's notes.</small>
+      </div>
+    </article>
+
+    <div class="lab">
+      <div><b>Keepr</b><span>A personal CRM you text in plain words. Partly maintained by Forge.</span></div>
+      <div><b>AEO toolkit</b><span>Makes websites readable by ChatGPT and Perplexity. Used in client audits.</span></div>
+      <div><b>Date Doctor</b><span>Date ideas from both partners' preferences.</span></div>
+      <div><b>Build-your-Bob</b><span>The shared framework behind all my bots.</span></div>
+      <div><b>Polymarket monitor</b><span>Live markets checked against breaking news.</span></div>
+      <div><b>DoomDraft</b><span>An endless AI feed in any brand's voice.</span></div>
+    </div>
   </section>
 
   <section aria-labelledby="how">
-    <h2 id="how">How I work</h2>
-    <ul class="how">
-      <li><b>Spec first, then agents.</b> I write the requirements and the checks, and AI coding agents build against them. If a placeholder is left unfinished, the build fails.</li>
-      <li><b>Research in days, not weeks.</b> Competitive analyses, data catalogues and market studies. For one, I mapped 538 data feeds and graded how much of each was really proprietary.</li>
-      <li><b>Reading the chain directly.</b> When a stablecoin slips off its peg, I go to the raw onchain data to find out who holds it and why.</li>
-    </ul>
+    <div class="h2"><h2 id="how">How I work</h2></div>
+    <div class="how">
+      <div><h3>Spec first, then agents</h3><p>I write the requirements and the checks. AI coding agents build against them, and the build fails on anything left unfinished.</p></div>
+      <div><h3>Research in days</h3><p>Competitive analyses and market studies that used to take weeks. For one, I mapped 538 data feeds and graded how proprietary each really was.</p></div>
+      <div><h3>Straight from the chain</h3><p>When a stablecoin slips off its peg, I read the raw onchain data to find out who holds it and why.</p></div>
+    </div>
   </section>
 
   <section aria-labelledby="crypto">
-    <h2 id="crypto">Crypto track record</h2>
-    <table>
-      <tr><td>Chakra Pool<span class="sub">Onchain yield and staking vaults I built and scaled</span></td><td class="n">$18M+ liquidity</td></tr>
-      <tr><td>HeliSwap<span class="sub">Hedera's first native DEX; I secured a $2.5M Hedera Foundation grant</span></td><td class="n">$7M+ TVL</td></tr>
-      <tr><td>Sherpa Stake<span class="sub">Staking platform, <a href="https://www.sherpastake.com/" target="_blank" rel="noopener">sherpastake.com</a></span></td><td class="n">$1B+ at peak</td></tr>
-      <tr><td>Anonymous DeFi project<span class="sub">Launched without my name on it</span></td><td class="n">$6M+ TVL</td></tr>
-      <tr><td>Developer course<span class="sub">Built with Metaschool</span></td><td class="n">7,000+ developers</td></tr>
-      <tr><td>RWAccelerator<span class="sub">Accelerator run with Google Cloud, which I founded and led</span></td><td class="n">7 of 150+ picked</td></tr>
-      <tr><td>ETHGlobal hackathons<span class="sub">Prizes from Polygon, Celo, The Graph, Scroll and Huddle01</span></td><td class="n">$14K+ won</td></tr>
-    </table>
+    <div class="h2"><h2 id="crypto">Before AI, I shipped crypto</h2><p>Products I built or led, and what they did.</p></div>
+    <div class="figs">
+      <div class="fig"><b>$1B+</b><span>Sherpa Stake</span><small>tokens staked at peak</small></div>
+      <div class="fig"><b>$18M+</b><span>Chakra Pool</span><small>liquidity in yield vaults</small></div>
+      <div class="fig"><b>$7M+</b><span>HeliSwap</span><small>TVL, plus a $2.5M Hedera grant</small></div>
+      <div class="fig"><b>$6M+</b><span>Anonymous DeFi project</span><small>TVL, launched without my name</small></div>
+      <div class="fig"><b>7,000+</b><span>Developer course</span><small>developers onboarded</small></div>
+      <div class="fig"><b>7 / 150+</b><span>RWAccelerator</span><small>projects picked, with Google Cloud</small></div>
+      <div class="fig"><b>$14K+</b><span>ETHGlobal</span><small>hackathon prizes</small></div>
+      <div class="fig"><b>5</b><span>Languages</span><small>German, Mandarin, English, Russian, French</small></div>
+    </div>
   </section>
 
-  <section aria-labelledby="exp">
-    <h2 id="exp">Experience</h2>
-    <table class="exp">
-      <tr><td class="y">2022 – now</td><td>Senior Product Manager<span class="sub">Tectonic Consulting, for MANTRA Chain · Hong Kong</span></td></tr>
-      <tr><td class="y">2022 – 2025</td><td>Senior Manager, Product &amp; Strategy<span class="sub">HeliSwap, a MANTRA joint venture · Hong Kong</span></td></tr>
-      <tr><td class="y">2020 – 2022</td><td>APAC Management Associate<span class="sub">ASSA ABLOY · Asia Pacific</span></td></tr>
-      <tr><td class="y">2020</td><td>Strategy Consulting<span class="sub">Arthur D. Little · Vienna</span></td></tr>
-      <tr><td class="y">2019 – 2020</td><td>Strategic Project Management<span class="sub">PayPal · London</span></td></tr>
-      <tr><td class="y">2019</td><td>Research Assistant<span class="sub">United Nations ESCAP · Bangkok</span></td></tr>
-    </table>
+  <section aria-labelledby="cv">
+    <div class="h2"><h2 id="cv">The route here</h2></div>
+    <div class="cv">
+      <div><h3>Work</h3><ol>
+        <li><span class="y">2022 – now</span><span>Senior Product Manager<small>Tectonic Consulting, for MANTRA Chain · Hong Kong</small></span></li>
+        <li><span class="y">2022 – 2025</span><span>Senior Manager, Product &amp; Strategy<small>HeliSwap, a MANTRA joint venture</small></span></li>
+        <li><span class="y">2020 – 2022</span><span>APAC Management Associate<small>ASSA ABLOY</small></span></li>
+        <li><span class="y">2020</span><span>Strategy Consulting<small>Arthur D. Little · Vienna</small></span></li>
+        <li><span class="y">2019 – 2020</span><span>Strategic Project Management<small>PayPal · London</small></span></li>
+        <li><span class="y">2019</span><span>Research Assistant<small>United Nations ESCAP · Bangkok</small></span></li>
+      </ol></div>
+      <div><h3>Study</h3><ol>
+        <li><span class="y">2018 – 2019</span><span>MSc International Business<small>Fudan School of Management · Shanghai</small></span></li>
+        <li><span class="y">2017 – 2018</span><span>MSc International Management<small>London Business School</small></span></li>
+        <li><span class="y">2016</span><span>Exchange, financial markets<small>The University of Hong Kong</small></span></li>
+        <li><span class="y">2013 – 2017</span><span>BSc International Business, top 10%<small>WU Vienna · CSC, Confucius and merit scholarships</small></span></li>
+      </ol></div>
+    </div>
   </section>
+</main>
 
-  <section aria-labelledby="edu">
-    <h2 id="edu">Education</h2>
-    <table class="edu">
-      <tr><td class="y">2018 – 2019</td><td>MSc International Business<span class="sub">Fudan School of Management · Shanghai</span></td></tr>
-      <tr><td class="y">2017 – 2018</td><td>MSc International Management<span class="sub">London Business School · London</span></td></tr>
-      <tr><td class="y">2016</td><td>Exchange, financial markets<span class="sub">The University of Hong Kong</span></td></tr>
-      <tr><td class="y">2013 – 2017</td><td>BSc International Business Administration, top 10%<span class="sub">WU Vienna University of Economics and Business</span></td></tr>
-    </table>
-    <p class="meta" style="margin-top:16px">Scholarships: Chinese Government (CSC), Confucius, WU Vienna merit</p>
-  </section>
+<footer>
+  <div class="wrap">
+    <div><p class="big">Building something with AI?</p><a href="https://www.linkedin.com/in/andre-ringdorfer/" target="_blank" rel="noopener">Talk to me on LinkedIn</a></div>
+    <span class="mono muted" style="align-self:end">andre-ringdorfer.com</span>
+  </div>
+</footer>
 
-  <footer class="meta">
-    <span>German, Mandarin, English, Russian, French</span>
-    <a href="https://www.linkedin.com/in/andre-ringdorfer/" target="_blank" rel="noopener">Find me on LinkedIn</a>
-  </footer>
-</div>
+<script>
+(() => {
+  const TZ = 'Asia/Hong_Kong';
+  const hk = () => {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+    return {h:+p.hour,m:+p.minute,s:+p.second};
+  };
+  const isNightHour = h => h >= 23 || h < 7;
+  let override = null; // null = follow the real clock
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2,'0');
+
+  function copy(night, t){
+    const time = `${pad(t.h)}:${pad(t.m)}`;
+    if (night){
+      $('h1').innerHTML = override === null
+        ? `It's ${time} in Hong Kong. I'm asleep. <em>My agents aren't.</em>`
+        : `After midnight in Hong Kong, I'm asleep. <em>My agents aren't.</em>`;
+      $('lede').textContent = 'Forge wakes every 30 minutes, picks up the next task, opens a pull request and reports back on Telegram. I review it over breakfast.';
+      $('switch').textContent = override === null ? 'See the day shift' : 'Back to the day shift';
+    } else {
+      $('h1').innerHTML = 'I run a team of AI agents from a Raspberry&nbsp;Pi.';
+      $('lede').textContent = 'By day I build products in onchain finance. When I log off, my agents take the night shift and ship code while I sleep.';
+      $('switch').textContent = 'See the night shift';
+    }
+  }
+
+  // ---- sky + skyline ----
+  const cv = $('sky'), ctx = cv.getContext('2d');
+  let towers = [], stars = [], W = 0, H = 0, forgeWin = null;
+  function rand(seed){ return () => (seed = (seed*16807)%2147483647)/2147483647; }
+  function layout(){
+    const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio||1,2);
+    W = r.width; H = r.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    const R = rand(11); towers = []; let x = -10;
+    const base = H, maxH = Math.min(260, H*.42);
+    while (x < W + 20){
+      const w = 34 + R()*70, h = maxH*(.35 + R()*.65) * (x > W*.55 && x < W*.8 ? 1.15 : 1);
+      const wins = [];
+      for (let yy = base - h + 14; yy < base - 10; yy += 13) for (let xx = x + 7; xx < x + w - 8; xx += 10) wins.push({x:xx,y:yy,lit:R()<.22,phase:R()*6});
+      towers.push({x,w,h,back:R()<.5,wins}); x += w + 2 + R()*6;
+    }
+    // Forge lives in one window of the tallest tower on the right half
+    const t = towers.filter(t=>t.x>W*.5).sort((a,b)=>b.h-a.h)[0] || towers[0];
+    forgeWin = t.wins[Math.floor(t.wins.length*.35)] || null;
+    const S = rand(5); stars = Array.from({length:140},()=>({x:S()*W,y:S()*H*.62,r:S()*1.1+.2,a:S()*.7+.2}));
+  }
+  const css = v => getComputedStyle(document.body).getPropertyValue(v).trim();
+  function draw(time){
+    const night = document.body.classList.contains('night');
+    const g = ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,css('--sky-a')); g.addColorStop(1,css('--sky-b'));
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+    if (night){ for (const s of stars){ ctx.globalAlpha = s.a*(.75+.25*Math.sin(time/900+s.x)); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,7); ctx.fill(); } ctx.globalAlpha=1; }
+    for (const pass of [true,false]) for (const t of towers){
+      if (t.back !== pass) continue;
+      ctx.fillStyle = pass ? css('--tower-2') : css('--tower');
+      const hh = pass ? t.h*.82 : t.h; ctx.fillRect(t.x, H-hh, t.w, hh);
+      if (!pass) for (const w of t.wins){
+        if (night && w.lit){ ctx.fillStyle = css('--lamp'); ctx.globalAlpha = .55 + .25*Math.sin(time/1600 + w.phase); ctx.fillRect(w.x,w.y,5,7); }
+        else if (!night){ ctx.fillStyle = '#9fb6cc'; ctx.globalAlpha = .18; ctx.fillRect(w.x,w.y,5,7); }
+        ctx.globalAlpha = 1;
+      }
+    }
+    if (forgeWin){ // Forge's window: always on, brighter at night
+      const pulse = .6 + .4*Math.sin(time/700);
+      ctx.fillStyle = css('--lamp'); ctx.shadowColor = css('--lamp'); ctx.shadowBlur = night ? 18*pulse : 6;
+      ctx.fillRect(forgeWin.x-1, forgeWin.y-1, 7, 9); ctx.shadowBlur = 0;
+      ctx.font = '12px JetBrains Mono, monospace'; ctx.fillStyle = night ? '#FFE3B3' : css('--ink');
+      ctx.globalAlpha = .9; ctx.fillText('← Forge', forgeWin.x + 12, forgeWin.y + 8); ctx.globalAlpha = 1;
+    }
+  }
+
+  function tick(){
+    const t = hk();
+    const night = override === null ? isNightHour(t.h) : override;
+    document.body.classList.toggle('night', night);
+    $('clock').textContent = `${pad(t.h)}:${pad(t.m)} in Hong Kong · ${night ? 'night shift' : 'day shift'}`;
+    const left = ((30 - (t.m % 30)) * 60 - t.s) % 1800;
+    $('forge').textContent = left > 1790 ? 'running now' : `next run ${pad(Math.floor(left/60))}:${pad(left%60)}`;
+    copy(night, t);
+  }
+  $('switch').addEventListener('click', () => {
+    const t = hk(); const realNight = isNightHour(t.h);
+    const current = document.body.classList.contains('night');
+    override = !current === realNight ? null : !current;
+    tick();
+  });
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function loop(ts){ draw(ts||0); if (!reduce) requestAnimationFrame(loop); }
+  addEventListener('resize', () => { layout(); draw(0); });
+  tick(); layout(); loop(0); setInterval(()=>{ tick(); if (reduce) draw(0); }, 1000);
+})();
+</script>
 </body>
 </html>
