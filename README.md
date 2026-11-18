@@ -12,4 +12,6 @@ Personal site. Plain static HTML, CSS and a little JavaScript, served by GitHub 
 
 ## GitHub contributions
 
-The homepage links to `ringman007` and embeds the past-year contribution calendar from `https://ghchart.rshah.org/ringman007`. The external service refreshes and caches GitHub data, so updates may take time to appear. No API token or build step is needed. If the image cannot load, the page shows a direct link to the GitHub contribution calendar. On narrow screens, the calendar scrolls horizontally. GitHub profile links are also in both pages’ navigation, footer and Person structured data.
+The homepage links to `ringman007`. `github-calendar.js` loads the past year’s dates, exact counts and activity levels from `https://github-contributions-api.jogruber.de/v4/ringman007?y=last` when the calendar approaches the viewport. Each day supports hover, tap and keyboard focus; arrow keys move between days, Home/End jump to the first/last day, and Escape dismisses the tooltip. Dates are formatted in UTC so they stay on the correct calendar day in every visitor’s timezone.
+
+The static image from `https://ghchart.rshah.org/ringman007` remains as a fallback if JavaScript or the data service is unavailable. Both external services cache GitHub data, so updates may take time to appear. No API token or build step is needed. On narrow screens, the calendar scrolls horizontally. GitHub profile links are also in both pages’ navigation, footer and Person structured data.
