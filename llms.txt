@@ -38,5 +38,28 @@ Pages:
 ## Languages
 German and Mandarin (native), English (fluent), Russian (conversational), French (basic)
 
+## Questions people ask (answers written by André)
+
+### What is The Forge?
+The Forge is André's AI engineer. It works around the clock: it picks up tasks, writes the code and hands it in for his review. Some of his own products are partly maintained by it.
+
+### What is he building right now?
+Mostly AI agents that do real work unattended: an AI engineer, a calorie tracker you talk to, a dashboard that pulls his whole financial portfolio into one view, and a video studio with an AI critic. A few more stay private.
+
+### What does André do day to day?
+He's a senior product manager working on onchain finance in Hong Kong. He turns research into roadmaps, runs teams across frontend, backend, smart contracts and design, and increasingly prototypes with AI before anything reaches engineering.
+
+### How does he use AI at work?
+Spec first, then agents. He writes the requirements and the checks, and AI coding agents build against them. He also uses AI for fast research: competitive analyses, data catalogues and onchain investigations that used to take weeks.
+
+### What has he built in crypto?
+Chakra Pool (US$18 million+ in deposits), HeliSwap (a US$2.5 million Hedera Foundation grant and US$7 million+ in deposits), Sherpa Stake (an EVM staking platform he built, with US$1 billion+ in tokens at peak), LuckyStake (a staking app on MANTRA Chain, now retired), 7,000+ developers onboarded through a developer course he created, and US$14,000+ in ETHGlobal hackathon prizes. He also led RWAccelerator with Google Cloud: 150+ startups applied, and he picked 7 and took them to launch.
+
+### Where did he study?
+WU Vienna (top 10%), then a double master's at London Business School and Fudan in Shanghai, with an exchange semester at the University of Hong Kong. He speaks German and Mandarin natively.
+
+### How can I reach him?
+LinkedIn is the only contact on this site: linkedin.com/in/andre-ringdorfer. Send him a message there.
+
 ## Contact
 - LinkedIn only: https://www.linkedin.com/in/andre-ringdorfer/
