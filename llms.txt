@@ -1,0 +1,35 @@
+# André Ringdorfer (苏文)
+
+> Product manager in Hong Kong who builds AI agents and products, with a track record in onchain finance and a background in strategy consulting.
+
+## AI work
+- Forge: three self-hosted AI agents on a Raspberry Pi 5 (autonomous coding on a schedule, inbox-to-Telegram alerts, general requests). It has merged pull requests on its own.
+- GoodInGoodOut: an AI calorie tracker. The Telegram bot is live; the iOS app is in development.
+- Form D Oracle: an agent that hashes SEC Form D filings and anchors them onchain for verification (demo).
+- AI video pipeline: open-source video generation with an AI judge-and-retry loop (in progress).
+- Keepr: an AI personal CRM over Telegram.
+- AEO toolkit: audits and rewrites that make websites readable by AI answer engines.
+
+## Crypto track record
+- Chakra Pool: onchain yield vaults, $18M+ liquidity.
+- HeliSwap: Hedera's first native DEX, $2.5M Hedera Foundation grant, $7M+ TVL.
+- Sherpa Stake: staking platform, $1B+ in tokens at peak.
+- Developer course with Metaschool: 7,000+ developers.
+- RWAccelerator with Google Cloud: 7 projects selected from 150+.
+- ETHGlobal hackathon prizes: $14K+.
+
+## Experience
+- 2022–now: Senior Product Manager, Tectonic Consulting (client: MANTRA Chain), Hong Kong
+- 2022–2025: Senior Manager, Product & Strategy, HeliSwap (MANTRA joint venture)
+- 2020–2022: APAC Management Associate, ASSA ABLOY
+- 2020: Strategy Consulting, Arthur D. Little, Vienna
+- 2019–2020: Strategic Project Management, PayPal, London
+- 2019: Research Assistant, United Nations ESCAP, Bangkok
+
+## Education
+- MSc International Business, Fudan School of Management
+- MSc International Management, London Business School
+- BSc International Business Administration (top 10%), WU Vienna
+
+## Contact
+- LinkedIn: https://www.linkedin.com/in/andre-ringdorfer/
