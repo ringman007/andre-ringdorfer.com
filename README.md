@@ -15,3 +15,7 @@ Personal site. Plain static HTML, CSS and a little JavaScript, served by GitHub 
 The homepage links to `ringman007`. `github-calendar.js` loads the past year’s dates, exact counts and activity levels from `https://github-contributions-api.jogruber.de/v4/ringman007?y=last` when the calendar approaches the viewport. Each day supports hover, tap and keyboard focus; arrow keys move between days, Home/End jump to the first/last day, and Escape dismisses the tooltip. Dates are formatted in UTC so they stay on the correct calendar day in every visitor’s timezone.
 
 The static image from `https://ghchart.rshah.org/ringman007` remains as a fallback if JavaScript or the data service is unavailable. Both external services cache GitHub data, so updates may take time to appear. No API token or build step is needed. On narrow screens, the calendar scrolls horizontally. GitHub profile links are also in both pages’ navigation, footer and Person structured data.
+
+## GoodInGoodOut preview
+
+The homepage app illustration is recreated in HTML/CSS from the iOS interface, with no screenshot downloads required at runtime. `gigo-demo.js` cycles through meal logging, daily totals and dashboard trends. Scene buttons select a screen and pause playback; Play resumes it. Playback stops while the phone is offscreen or the browser tab is hidden. Visitors who prefer reduced motion see a static daily view and can select other screens.

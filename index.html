@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="footer.css">
 <script src="github-calendar.js" defer></script>
+<script src="gigo-demo.js" defer></script>
 <style>.ft{--ft-max:1180px;--ft-gut:var(--gut)}</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://andre-ringdorfer.com/#website", "url": "https://andre-ringdorfer.com/", "name": "André Ringdorfer", "alternateName": "苏文", "inLanguage": "en", "publisher": {"@id": "https://andre-ringdorfer.com/#person"}}, {"@type": "Person", "@id": "https://andre-ringdorfer.com/#person", "name": "André Ringdorfer", "alternateName": "苏文", "givenName": "André", "familyName": "Ringdorfer", "url": "https://andre-ringdorfer.com/", "jobTitle": "Senior Product Manager", "worksFor": {"@type": "Organization", "name": "Techtonic Consulting Ltd"}, "address": {"@type": "PostalAddress", "addressLocality": "Hong Kong", "addressCountry": "HK"}, "description": "Senior product manager in onchain finance in Hong Kong who builds AI agents. Before AI, he shipped crypto products including Sherpa Stake, Chakra Pool and HeliSwap.", "knowsAbout": ["AI agents", "AI-assisted software development", "Product management", "Onchain finance", "DeFi", "Staking", "Real-world assets", "Strategy"], "knowsLanguage": ["de", "zh", "en", "ru", "fr"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "WU Vienna University of Economics and Business"}, {"@type": "CollegeOrUniversity", "name": "London Business School"}, {"@type": "CollegeOrUniversity", "name": "Fudan University School of Management"}, {"@type": "CollegeOrUniversity", "name": "The University of Hong Kong"}], "sameAs": ["https://www.linkedin.com/in/andre-ringdorfer/", "https://github.com/ringman007"]}, {"@type": "ProfilePage", "@id": "https://andre-ringdorfer.com/#webpage", "url": "https://andre-ringdorfer.com/", "name": "André Ringdorfer (苏文) · AI agents and onchain finance, Hong Kong", "description": "André Ringdorfer runs a team of AI agents from a Raspberry Pi in Hong Kong. They work around the clock. Before AI, he shipped crypto.", "inLanguage": "en", "isPartOf": {"@id": "https://andre-ringdorfer.com/#website"}, "mainEntity": {"@id": "https://andre-ringdorfer.com/#person"}, "about": {"@id": "https://andre-ringdorfer.com/#person"}, "dateModified": "2026-11-18"}, {"@type": "FAQPage", "@id": "https://andre-ringdorfer.com/#faq", "url": "https://andre-ringdorfer.com/", "about": {"@id": "https://andre-ringdorfer.com/#person"}, "mainEntity": [{"@type": "Question", "name": "What is The Forge?", "acceptedAnswer": {"@type": "Answer", "text": "The Forge is André's AI engineer. It works around the clock: it picks up tasks, writes the code and hands it in for his review. Some of his own products are partly maintained by it."}}, {"@type": "Question", "name": "What is he building right now?", "acceptedAnswer": {"@type": "Answer", "text": "Mostly AI agents that do real work unattended: an AI engineer, a calorie tracker you talk to, a dashboard that pulls his whole financial portfolio into one view, and a video studio with an AI critic. A few more stay private."}}, {"@type": "Question", "name": "What does André do day to day?", "acceptedAnswer": {"@type": "Answer", "text": "He's a senior product manager working on onchain finance in Hong Kong. He turns research into roadmaps, runs teams across frontend, backend, smart contracts and design, and increasingly prototypes with AI before anything reaches engineering."}}, {"@type": "Question", "name": "How does he use AI at work?", "acceptedAnswer": {"@type": "Answer", "text": "Spec first, then agents. He writes the requirements and the checks, and AI coding agents build against them. He also uses AI for fast research: competitive analyses, data catalogues and onchain investigations that used to take weeks."}}, {"@type": "Question", "name": "What has he built in crypto?", "acceptedAnswer": {"@type": "Answer", "text": "Chakra Pool (US$18 million+ in deposits), HeliSwap (a US$2.5 million Hedera Foundation grant and US$7 million+ in deposits), Sherpa Stake (an EVM staking platform he built, with US$1 billion+ in tokens at peak), LuckyStake (a staking app on MANTRA Chain, now retired), 7,000+ developers onboarded through a developer course he created, and US$14,000+ in ETHGlobal hackathon prizes. He also led RWAccelerator with Google Cloud: 150+ startups applied, and he picked 7 and took them to launch."}}, {"@type": "Question", "name": "Where did he study?", "acceptedAnswer": {"@type": "Answer", "text": "WU Vienna (top 10%), then a double master's at London Business School and Fudan in Shanghai, with an exchange semester at the University of Hong Kong. He speaks German and Mandarin natively."}}, {"@type": "Question", "name": "How can I reach him?", "acceptedAnswer": {"@type": "Answer", "text": "LinkedIn is the best way to reach André: linkedin.com/in/andre-ringdorfer. You can also explore his code on GitHub at github.com/ringman007."}}]}]}</script>
 </head>
@@ -93,24 +94,65 @@
   </div>
 </section>
 
-<section class="gigo">
+<section class="gigo" id="gigo">
   <div class="wrap split">
     <div style="flex:1 1 340px;max-width:520px">
       <div class="name">GoodInGoodOut</div>
       <h3 class="big">A calorie tracker you just talk to. Describe a meal and it logs every part of it.</h3>
       <p class="lede">I use it every day. The iOS app is on its way.</p>
-      <div class="meals" id="meals"><button type="button">Breakfast</button><button type="button">Lunch</button><button type="button">Snack</button></div>
-    </div>
-    <div class="phone" aria-label="Illustration: a meal described in words and logged item by item">
-      <div class="screen">
-        <header><b>Today</b><span><span id="gtotal">0</span> kcal</span></header>
-        <div class="feed">
-          <div class="said"><span id="gtyped"></span><span class="caret" id="caret"></span></div>
-          <div><div id="gitems"></div><div class="logged" id="glogged"><span>Logged</span><span><span id="gmeal">0</span> kcal</span></div></div>
-        </div>
-        <div class="inputbar"><span>Describe a meal</span><i></i></div>
+      <div class="gg-scenes" role="group" aria-label="Explore the GoodInGoodOut demo">
+        <button type="button" data-gg-scene="log" aria-pressed="true">Log a meal</button>
+        <button type="button" data-gg-scene="home" aria-pressed="false">Daily totals</button>
+        <button type="button" data-gg-scene="dashboard" aria-pressed="false">Trends</button>
       </div>
+      <div class="gg-demo-meta"><span id="gg-caption">Say it. See every ingredient.</span><button type="button" id="gg-play" aria-label="Pause GoodInGoodOut animation">Pause <span aria-hidden="true">Ⅱ</span></button></div>
     </div>
+    <figure class="gg-phone" aria-label="Interactive illustration of GoodInGoodOut, based on the iOS app" data-scene="log">
+      <div class="gg-screen">
+        <div class="gg-status" aria-hidden="true"><span>9:41</span><i></i><span>▮▮▮ ▰</span></div>
+        <div class="gg-view gg-log" data-gg-view="log">
+          <div class="gg-budget"><div><b><span id="gg-left">1,254</span> left</b><span><span id="gg-protein">101</span> g protein⌄</span></div><div class="gg-progress"><i style="width:21%"></i><i style="width:21%"></i><i id="gg-progress-meal"></i></div></div>
+          <div class="gg-conversation">
+            <div class="gg-earlier"><span>Earlier today</span><b>Frittata & protein bar</b><small>1,246 cal · 101 g protein</small></div>
+            <div class="gg-message"><span id="gg-typed">Spicy tuna hand roll</span><small>♩ &nbsp;Understood on device</small></div>
+            <div class="gg-breakdown">
+              <h4>Spicy tuna hand roll</h4>
+              <div class="gg-ingredient"><div>Sushi rice <small>~50 g · crispy toasted bits</small></div><b>90</b></div>
+              <div class="gg-ingredient"><div>Spicy tuna & mayo <small>~30 g · 7 g protein</small></div><b>60</b></div>
+              <div class="gg-ingredient"><div>Nori cone <small>1 sheet · partly eaten</small></div><b>20</b></div>
+              <div class="gg-meal-total"><b>Meal</b><b>170 cal · 10 g protein</b></div>
+              <div class="gg-confirm">✓ Logged. Every ingredient counted.</div>
+            </div>
+          </div>
+          <div class="gg-compose" aria-hidden="true"><span>▣</span><div>What did you eat? <b>♩</b></div></div>
+        </div>
+        <div class="gg-view gg-home" data-gg-view="home" hidden>
+          <header class="gg-day"><span>‹</span><div><b>Today <em>♨ 113</em></b><small>One meal at a time.</small></div><span>›</span></header>
+          <div class="gg-card gg-summary"><div class="gg-calories"><b>1,416</b><span>cal eaten</span></div><div class="gg-progress"><i style="width:21%"></i><i style="width:21%"></i><i style="width:7%"></i><i style="width:8%"></i></div><p><b>1,084 left</b> of 2,500</p><div class="gg-macros"><div>Protein<b>111 g</b></div><div>Fiber<b>10 g</b></div><div>Fat<b>76 g</b></div></div></div>
+          <div class="gg-actions" aria-hidden="true"><span>Photo</span><span>Library</span><span>Type · Talk</span></div>
+          <p class="gg-list-label">LOGGED · 4 MEALS</p>
+          <div class="gg-card gg-food-list">
+            <div><span class="gg-food-icon">◒</span><div>Mushroom & pancetta<small>11:15 · frittata</small></div><b>528<small>30 g protein</small></b></div>
+            <div><span class="gg-food-icon">◒</span><div>Mushroom & pancetta<small>16:07 · frittata</small></div><b>528<small>51 g protein</small></b></div>
+            <div class="gg-new-meal"><span class="gg-food-icon">◭</span><div>Spicy tuna hand roll<small>19:54</small></div><b>170<small>10 g protein</small></b></div>
+            <div><span class="gg-food-icon">▥</span><div>Protein bar<small>19:55</small></div><b>190<small>20 g protein</small></b></div>
+          </div>
+        </div>
+        <div class="gg-view gg-dashboard" data-gg-view="dashboard" hidden>
+          <header class="gg-trend-title"><b>Your week at a glance <em>♨</em></b><small>The little things add up.</small></header>
+          <div class="gg-period" aria-hidden="true"><span>7 days</span><span>30 days</span><span>90 days</span></div>
+          <div class="gg-card gg-chart-card"><h4>Last 7 days <span>›</span></h4><p>≈ 2,270 a day · 7% less than last week</p><div class="gg-week-bars" aria-hidden="true"><i style="--bar:18%"></i><i style="--bar:29%"></i><i style="--bar:100%"></i><i style="--bar:35%"></i><i style="--bar:45%"></i><i style="--bar:50%"></i><i style="--bar:30%"></i></div><div class="gg-axis" aria-hidden="true"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div></div>
+          <div class="gg-card gg-chart-card"><h4>When you eat <span>›</span></h4><p>Your day, meal by meal.</p><div class="gg-hours" aria-hidden="true"><i style="--bar:12%"></i><i style="--bar:85%"></i><i style="--bar:0%"></i><i style="--bar:0%"></i><i style="--bar:0%"></i><i style="--bar:0%"></i><i style="--bar:18%"></i><i style="--bar:32%"></i><i style="--bar:9%"></i><i style="--bar:33%"></i><i style="--bar:30%"></i><i style="--bar:0%"></i><i style="--bar:36%"></i><i style="--bar:0%"></i><i style="--bar:18%"></i><i style="--bar:24%"></i><i style="--bar:0%"></i><i style="--bar:22%"></i></div><div class="gg-axis" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span></div></div>
+          <div class="gg-card gg-chart-card gg-weight"><h4>Weight <span>›</span></h4><p><strong>83.0 kg</strong> Down 7.8 kg over 10 weeks</p><svg viewBox="0 0 300 94" role="img" aria-label="Example weight trend from 90.8 to 83 kilograms over ten weeks"><path class="gg-chart-grid" d="M0 14H300M0 38H300M0 62H300M0 86H300"/><path class="gg-goal" d="M0 65H300"/><path class="gg-weight-line" d="M3 4C20 22 27 30 38 34S64 48 78 45S102 37 112 44S137 80 151 76S178 50 188 52S212 57 222 69S237 86 242 91"/><g class="gg-weight-dots"><circle cx="3" cy="4" r="2.5"/><circle cx="38" cy="34" r="2.5"/><circle cx="78" cy="45" r="2.5"/><circle cx="112" cy="44" r="2.5"/><circle cx="151" cy="76" r="2.5"/><circle cx="188" cy="52" r="2.5"/><circle cx="222" cy="69" r="2.5"/><circle cx="242" cy="91" r="2.5"/></g></svg></div>
+        </div>
+        <nav class="gg-tabs" aria-label="GoodInGoodOut preview screens">
+          <button type="button" data-gg-scene="log" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 4v-4H4a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z M6 8h8M6 12h6"/></svg>Log</button>
+          <button type="button" data-gg-scene="home" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 11 10-9 10 9M5 9v12h5v-7h4v7h5V9"/></svg>Home</button>
+          <button type="button" data-gg-scene="dashboard" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21h20M5 17V9h3v8ZM11 17V3h3v14ZM17 17v-5h3v5Z"/></svg>Dashboard</button>
+        </nav>
+      </div>
+      <figcaption>Inside GoodInGoodOut · App preview</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -356,30 +398,7 @@
     $('ffoot').textContent = approved === 4 ? 'All four approved' : (waiting ? waiting + ' waiting for review' : 'Nothing to review yet') + (approved ? ' · ' + approved + ' approved' : '');
   }
 
-  /* ---------- GoodInGoodOut ---------- */
-  const MEALS = [
-    { text: 'Two eggs, buttered toast and a flat white', items: [['Eggs × 2',156],['Toast, 1 slice',95],['Butter, 1 tsp',35],['Flat white',120]] },
-    { text: 'Chicken rice, a side of greens and an iced lemon tea', items: [['Chicken rice, 1 plate',600],['Stir-fried greens',90],['Iced lemon tea',110]] },
-    { text: 'A handful of almonds and a banana', items: [['Almonds, 30 g',174],['Banana',105]] }
-  ];
-  let meal = 0, mealStart = 0, T = 0;
-  const mealBtns = [...$('meals').children];
-  mealBtns.forEach((b, i) => b.onclick = () => { meal = i; mealStart = T; renderMeal(); gigo(T); });
-  function renderMeal(){
-    mealBtns.forEach((b, i) => b.setAttribute('aria-pressed', i === meal));
-    $('gitems').innerHTML = MEALS[meal].items.map(([n,k]) => `<div class="item"><span>${n}</span><span>${k} kcal</span></div>`).join('');
-    $('gmeal').textContent = MEALS[meal].items.reduce((a, it) => a + it[1], 0);
-  }
-  function gigo(t){
-    const m = MEALS[meal], words = m.text.split(' '), gs = reduce ? 99 : t - mealStart;
-    const steps = Math.ceil(words.length / 2), shown = Math.max(0, Math.min(m.items.length, gs - steps));
-    $('gtyped').textContent = words.slice(0, Math.min(words.length, (gs + 1) * 2)).join(' ');
-    $('caret').style.opacity = gs < steps ? 1 : 0;
-    [...$('gitems').children].forEach((el, i) => { el.style.opacity = i < shown ? 1 : 0; el.style.transform = i < shown ? 'none' : 'translateY(8px)'; });
-    $('gtotal').textContent = m.items.slice(0, shown).reduce((a, it) => a + it[1], 0);
-    $('glogged').style.opacity = gs - steps >= m.items.length ? 1 : 0;
-    if (!reduce && gs > steps + m.items.length + 6){ meal = (meal + 1) % MEALS.length; mealStart = t; renderMeal(); }
-  }
+  let T = 0;
 
   /* ---------- dashboard ---------- */
   [34,38,36,42,40,46,44,50,47,52,56,53,58,62,60,66,63,70,74,71,78,82,80,88].forEach(h => { const i = document.createElement('i'); i.style.height = h + '%'; $('bars').appendChild(i); });
@@ -498,8 +517,8 @@
   $('flip').addEventListener('click', () => setTimeout(() => { readCols(); L.forEach(drawLane); }, 50));
 
   /* ---------- go ---------- */
-  renderMeal(); setScene(); playSubs(); tick();
-  const frame = () => { forge(T); gigo(T); dash(T); vid(T); };
+  setScene(); playSubs(); tick();
+  const frame = () => { forge(T); dash(T); vid(T); };
   frame();
   setInterval(tick, 1000);
   if (!reduce) setInterval(() => { T++; frame(); }, 700);
