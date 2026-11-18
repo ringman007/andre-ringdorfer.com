@@ -35,6 +35,8 @@
 <link rel="stylesheet" href="footer.css">
 <script src="github-calendar.js" defer></script>
 <script src="gigo-demo.js" defer></script>
+<link rel="stylesheet" href="money-demo.css">
+<script src="money-demo.js" defer></script>
 <style>.ft{--ft-max:1180px;--ft-gut:var(--gut)}</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://andre-ringdorfer.com/#website", "url": "https://andre-ringdorfer.com/", "name": "André Ringdorfer", "alternateName": "苏文", "inLanguage": "en", "publisher": {"@id": "https://andre-ringdorfer.com/#person"}}, {"@type": "Person", "@id": "https://andre-ringdorfer.com/#person", "name": "André Ringdorfer", "alternateName": "苏文", "givenName": "André", "familyName": "Ringdorfer", "url": "https://andre-ringdorfer.com/", "jobTitle": "Senior Product Manager", "worksFor": {"@type": "Organization", "name": "Techtonic Consulting Ltd"}, "address": {"@type": "PostalAddress", "addressLocality": "Hong Kong", "addressCountry": "HK"}, "description": "Senior product manager in onchain finance in Hong Kong who builds AI agents. Before AI, he shipped crypto products including Sherpa Stake, Chakra Pool and HeliSwap.", "knowsAbout": ["AI agents", "AI-assisted software development", "Product management", "Onchain finance", "DeFi", "Staking", "Real-world assets", "Strategy"], "knowsLanguage": ["de", "zh", "en", "ru", "fr"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "WU Vienna University of Economics and Business"}, {"@type": "CollegeOrUniversity", "name": "London Business School"}, {"@type": "CollegeOrUniversity", "name": "Fudan University School of Management"}, {"@type": "CollegeOrUniversity", "name": "The University of Hong Kong"}], "sameAs": ["https://www.linkedin.com/in/andre-ringdorfer/", "https://github.com/ringman007"]}, {"@type": "ProfilePage", "@id": "https://andre-ringdorfer.com/#webpage", "url": "https://andre-ringdorfer.com/", "name": "André Ringdorfer (苏文) · AI agents and onchain finance, Hong Kong", "description": "André Ringdorfer runs a team of AI agents from a Raspberry Pi in Hong Kong. They work around the clock. Before AI, he shipped crypto.", "inLanguage": "en", "isPartOf": {"@id": "https://andre-ringdorfer.com/#website"}, "mainEntity": {"@id": "https://andre-ringdorfer.com/#person"}, "about": {"@id": "https://andre-ringdorfer.com/#person"}, "dateModified": "2026-11-18"}, {"@type": "FAQPage", "@id": "https://andre-ringdorfer.com/#faq", "url": "https://andre-ringdorfer.com/", "about": {"@id": "https://andre-ringdorfer.com/#person"}, "mainEntity": [{"@type": "Question", "name": "What is The Forge?", "acceptedAnswer": {"@type": "Answer", "text": "The Forge is André's AI engineer. It works around the clock: it picks up tasks, writes the code and hands it in for his review. Some of his own products are partly maintained by it."}}, {"@type": "Question", "name": "What is he building right now?", "acceptedAnswer": {"@type": "Answer", "text": "Mostly AI agents that do real work unattended: an AI engineer, a calorie tracker you talk to, a dashboard that pulls his whole financial portfolio into one view, and a video studio with an AI critic. A few more stay private."}}, {"@type": "Question", "name": "What does André do day to day?", "acceptedAnswer": {"@type": "Answer", "text": "He's a senior product manager working on onchain finance in Hong Kong. He turns research into roadmaps, runs teams across frontend, backend, smart contracts and design, and increasingly prototypes with AI before anything reaches engineering."}}, {"@type": "Question", "name": "How does he use AI at work?", "acceptedAnswer": {"@type": "Answer", "text": "Spec first, then agents. He writes the requirements and the checks, and AI coding agents build against them. He also uses AI for fast research: competitive analyses, data catalogues and onchain investigations that used to take weeks."}}, {"@type": "Question", "name": "What has he built in crypto?", "acceptedAnswer": {"@type": "Answer", "text": "Chakra Pool (US$18 million+ in deposits), HeliSwap (a US$2.5 million Hedera Foundation grant and US$7 million+ in deposits), Sherpa Stake (an EVM staking platform he built, with US$1 billion+ in tokens at peak), LuckyStake (a staking app on MANTRA Chain, now retired), 7,000+ developers onboarded through a developer course he created, and US$14,000+ in ETHGlobal hackathon prizes. He also led RWAccelerator with Google Cloud: 150+ startups applied, and he picked 7 and took them to launch."}}, {"@type": "Question", "name": "Where did he study?", "acceptedAnswer": {"@type": "Answer", "text": "WU Vienna (top 10%), then a double master's at London Business School and Fudan in Shanghai, with an exchange semester at the University of Hong Kong. He speaks German and Mandarin natively."}}, {"@type": "Question", "name": "How can I reach him?", "acceptedAnswer": {"@type": "Answer", "text": "LinkedIn is the best way to reach André: linkedin.com/in/andre-ringdorfer. You can also explore his code on GitHub at github.com/ringman007."}}]}]}</script>
 </head>
@@ -156,21 +158,79 @@
   </div>
 </section>
 
-<section class="dash">
+<section class="money" id="money" aria-labelledby="money-title">
   <div class="wrap">
-    <div class="name">Portfolio dashboard</div>
-    <div class="head">
-      <h3 class="big">Every account, wallet and position, pulled in automatically and aggregated into one live dashboard.</h3>
-      <p>No spreadsheets, no logging in to ten apps.</p>
+    <div class="money-intro">
+      <div><div class="name">DailyMoney <span> / Portfolio dashboard</span></div><h3 class="big" id="money-title">All your money.<br>One clear picture.</h3></div>
+      <p>Banks, markets and wallets, brought together. Know what you own, what moved and where it went.</p>
     </div>
-    <div class="panel" aria-label="Illustration: a combined portfolio view with amounts hidden">
-      <div class="total">
-        <div class="meta"><span>Total, all sources</span><span>Last refresh <span id="dclock">00:00:00</span></span></div>
-        <div class="amt"><b>•••,•••</b><span>Amounts hidden</span></div>
-        <div class="bars" id="bars"></div>
+    <div class="money-story"><div><span class="money-chapter" id="money-chapter">01 / THE BIG PICTURE</span><h4 id="money-headline">Your whole financial life. In one view.</h4></div><button type="button" id="money-play" aria-label="Pause DailyMoney preview">Pause <span aria-hidden="true">Ⅱ</span></button></div>
+    <div class="money-cinema" data-money-scene="dashboard" aria-label="Animated DailyMoney product preview with fictional data">
+      <div class="money-window">
+        <div class="money-toolbar"><span class="money-brand"><i aria-hidden="true">d.</i> DailyMoney</span><span class="money-demo-tag">DEMO DATA</span><span class="money-connected"><i></i> All connected</span></div>
+        <nav class="money-nav" aria-label="DailyMoney preview screens">
+          <button type="button" data-money-target="dashboard" aria-pressed="true"><span>01</span>Dashboard<i></i></button>
+          <button type="button" data-money-target="changes" aria-pressed="false"><span>02</span>Changes<i></i></button>
+          <button type="button" data-money-target="holdings" aria-pressed="false"><span>03</span>Holdings<i></i></button>
+          <button type="button" data-money-target="spending" aria-pressed="false"><span>04</span>Spending<i></i></button>
+        </nav>
+        <div class="money-screen" data-money-view="dashboard">
+          <div class="money-overview-grid">
+            <div class="money-card money-networth"><div class="money-card-label">NET WORTH <span>USD</span></div><div class="money-big-value" id="money-networth">$1,284,600<span>.00</span></div><p><b class="money-up">↗ +$42,600</b> over the last 90 days</p>
+              <div class="money-total-chart"><svg viewBox="0 0 600 110" preserveAspectRatio="none" role="img" aria-label="Fictional portfolio value rising over time"><defs><linearGradient id="money-area" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a39bff" stop-opacity=".25"/><stop offset="1" stop-color="#a39bff" stop-opacity="0"/></linearGradient></defs><path class="money-area" d="M0 96L25 88L50 92L75 73L100 78L125 68L150 76L175 59L200 65L225 50L250 54L275 40L300 46L325 36L350 45L375 26L400 32L425 19L450 28L475 14L500 22L525 12L550 19L575 8L600 4V110H0Z"/><path class="money-trend-line" d="M0 96L25 88L50 92L75 73L100 78L125 68L150 76L175 59L200 65L225 50L250 54L275 40L300 46L325 36L350 45L375 26L400 32L425 19L450 28L475 14L500 22L525 12L550 19L575 8L600 4"/></svg><div><span>JAN</span><span>FEB</span><span>MAR</span></div></div>
+              <div class="money-mini-metrics"><div><span>24 hours</span><b class="money-up">+$8,420</b></div><div><span>14 days</span><b class="money-up">+$18,460</b></div><div><span>90 days</span><b class="money-up">+$42,600</b></div></div>
+            </div>
+            <div class="money-card money-places"><div class="money-card-label">WHERE IT IS <span>4 places</span></div>
+              <div><i class="money-place-icon">N</i><div>Northstar Markets<small>Investments · Synced</small></div><b>$552,378</b></div>
+              <div><i class="money-place-icon">H</i><div>Harbor Bank<small>Cash · Synced</small></div><b>$346,842</b></div>
+              <div><i class="money-place-icon">A</i><div>Atlas Digital<small>Digital assets · Synced</small></div><b>$256,920</b></div>
+              <div><i class="money-place-icon">C</i><div>Cedar Pension<small>Retirement · Imported</small></div><b>$128,460</b></div>
+              <div class="money-sync-note"><i></i> 18 sources. One picture.</div>
+            </div>
+          </div>
+          <div class="money-card money-allocation"><div class="money-card-label">WHAT KIND OF MONEY <span>Everything accounted for</span></div><div class="money-allocation-bar" aria-hidden="true"><i style="--share:43%;--color:#a39bff"></i><i style="--share:27%;--color:#8ad9c0"></i><i style="--share:20%;--color:#70aafa"></i><i style="--share:10%;--color:#e3bd79"></i></div><div class="money-allocation-legend"><span><i style="--color:#a39bff"></i>Investments <b>43%</b></span><span><i style="--color:#8ad9c0"></i>Cash <b>27%</b></span><span><i style="--color:#70aafa"></i>Digital assets <b>20%</b></span><span><i style="--color:#e3bd79"></i>Retirement <b>10%</b></span></div></div>
+        </div>
+        <div class="money-screen" data-money-view="changes" hidden>
+          <div class="money-card money-changes-card"><div class="money-card-label">WHAT CHANGED <span>Last 14 days · USD</span></div><div class="money-change-heading"><div class="money-big-value money-up">+$18,460</div><p>Know the difference between<br><b>money you added</b> and <b>money you earned.</b></p></div>
+            <div class="money-waterfall" role="img" aria-label="Fictional change: start 1,266,140 dollars, 9,000 added, 11,240 from prices, minus 1,780 from exchange rates, ending at 1,284,600 dollars.">
+              <div style="--base:0%;--height:34%;--delay:0s"><b>$1.266M</b><i class="money-wf-total"></i><span>Start</span></div>
+              <div style="--base:34%;--height:25%;--delay:.2s"><b>+$9,000</b><i class="money-wf-added"></i><span>Added</span></div>
+              <div style="--base:59%;--height:31%;--delay:.4s"><b>+$11,240</b><i class="money-wf-gain"></i><span>Prices</span></div>
+              <div style="--base:85%;--height:5%;--delay:.6s"><b>−$1,780</b><i class="money-wf-loss"></i><span>FX</span></div>
+              <div style="--base:0%;--height:85%;--delay:.8s"><b>$1.285M</b><i class="money-wf-total"></i><span>End</span></div>
+            </div>
+            <div class="money-change-key"><span><i class="money-key-added"></i> You added <b>$9,000</b></span><span><i class="money-key-earned"></i> You earned <b>$9,460</b></span><span class="money-change-note">Deposits are never mistaken for returns.</span></div>
+          </div>
+          <div class="money-insight"><span aria-hidden="true">↗</span><p><b>See the why behind the number.</b> Prices, exchange rates and deposits, separated automatically.</p></div>
+        </div>
+        <div class="money-screen" data-money-view="holdings" hidden>
+          <div class="money-card money-holdings-card"><div class="money-holdings-head"><div><div class="money-card-label">HOLDINGS</div><h5>Every position. Nothing scattered.</h5></div><span class="money-filter-label">All assets <span aria-hidden="true">⌄</span></span></div>
+            <div class="money-table-wrap"><table class="money-holdings-table"><thead><tr><th>Asset</th><th>14-day trend</th><th>Value</th><th>Price change</th></tr></thead><tbody>
+              <tr style="--row:0"><td><i style="--asset-color:#a39bff">W</i><div>World Equity Fund<small>Northstar Markets</small></div></td><td><svg viewBox="0 0 100 28" aria-hidden="true"><path d="M1 24L15 20L25 22L39 13L50 17L63 10L75 14L88 5L99 3"/></svg></td><td>$310,200</td><td class="money-up">+4.8%</td></tr>
+              <tr style="--row:1"><td><i style="--asset-color:#70aafa">T</i><div>Future Tech Fund<small>Northstar Markets</small></div></td><td><svg viewBox="0 0 100 28" aria-hidden="true"><path d="M1 24L12 18L25 23L38 16L51 9L65 14L79 5L90 9L99 1"/></svg></td><td>$242,178</td><td class="money-up">+6.2%</td></tr>
+              <tr style="--row:2"><td><i style="--asset-color:#8ad9c0">$</i><div>Dollar Reserve<small>Harbor Bank</small></div></td><td><svg viewBox="0 0 100 28" aria-hidden="true"><path d="M1 15L20 15L40 14L60 14L80 13L99 13"/></svg></td><td>$346,842</td><td class="money-neutral">0.0%</td></tr>
+              <tr style="--row:3"><td><i style="--asset-color:#e3bd79">B</i><div>Bitcoin<small>Atlas Digital</small></div></td><td><svg viewBox="0 0 100 28" aria-hidden="true"><path d="M1 24L13 12L26 18L37 10L49 16L60 5L72 9L85 3L99 6"/></svg></td><td>$164,300</td><td class="money-up">+8.7%</td></tr>
+              <tr style="--row:4"><td><i style="--asset-color:#aeaae1">E</i><div>Ether<small>Atlas Digital</small></div></td><td><svg class="money-spark-down" viewBox="0 0 100 28" aria-hidden="true"><path d="M1 5L13 10L25 7L38 15L50 12L62 21L75 16L87 23L99 21"/></svg></td><td>$92,620</td><td class="money-down">−2.3%</td></tr>
+              <tr style="--row:5"><td><i style="--asset-color:#d6a4cb">P</i><div>Long Horizon Pension<small>Cedar Pension</small></div></td><td><svg viewBox="0 0 100 28" aria-hidden="true"><path d="M1 23L16 22L32 18L48 19L64 13L80 12L99 7"/></svg></td><td>$128,460</td><td class="money-up">+1.9%</td></tr>
+            </tbody></table></div>
+          </div>
+          <div class="money-insight"><span aria-hidden="true">◎</span><p><b>From the big picture to a single position.</b> Markets, cash and crypto, side by side.</p></div>
+        </div>
+        <div class="money-screen" data-money-view="spending" hidden>
+          <div class="money-spend-grid"><div class="money-card money-spend-summary"><div class="money-card-label">SPENDING <span>March · Example month</span></div><div class="money-big-value">€3,480</div><p><b class="money-up">↓ 12% less</b> than the month before</p><div class="money-spend-ring"><svg viewBox="0 0 160 160" role="img" aria-label="Fictional spending: housing 50 percent, food and coffee 25 percent, travel 15 percent, everything else 10 percent"><circle class="money-ring-track" cx="80" cy="80" r="60"/><circle style="--length:188.5;--offset:0;--ring-color:#a39bff" cx="80" cy="80" r="60"/><circle style="--length:94.25;--offset:-188.5;--ring-color:#8ad9c0" cx="80" cy="80" r="60"/><circle style="--length:56.55;--offset:-282.75;--ring-color:#70aafa" cx="80" cy="80" r="60"/><circle style="--length:37.7;--offset:-339.3;--ring-color:#e3bd79" cx="80" cy="80" r="60"/></svg><div><b>4</b><span>categories</span></div></div><div class="money-savings"><span>Savings rate</span><b>38<span>%</span></b><small>More room for what comes next.</small></div></div>
+            <div class="money-card money-spend-categories"><div class="money-card-label">WHERE IT WENT <span>This month</span></div>
+              <div class="money-category" style="--spend:100%;--color:#a39bff;--delay:.1s"><div><b>Housing</b><strong>€1,740</strong></div><span><i></i></span><small>50% of spending · Fixed costs</small></div>
+              <div class="money-category" style="--spend:50%;--color:#8ad9c0;--delay:.25s"><div><b>Food & coffee</b><strong>€870</strong></div><span><i></i></span><small>25% of spending · Everyday life</small></div>
+              <div class="money-category" style="--spend:30%;--color:#70aafa;--delay:.4s"><div><b>Travel</b><strong>€522</strong></div><span><i></i></span><small>15% of spending · Going places</small></div>
+              <div class="money-category" style="--spend:20%;--color:#e3bd79;--delay:.55s"><div><b>Everything else</b><strong>€348</strong></div><span><i></i></span><small>10% of spending · The little things</small></div>
+              <div class="money-spend-note">Transfers between your accounts aren’t spending.</div>
+            </div>
+          </div>
+        </div>
+        <div class="money-app-footer"><span><i></i> One view. Every account.</span><span>Illustrative data throughout</span></div>
       </div>
-      <div class="sources" id="sources"></div>
     </div>
+    <div class="money-film-footer"><p id="money-caption">The whole picture, without opening a dozen apps.</p><span>PRODUCT PREVIEW · FICTIONAL DATA</span></div>
   </div>
 </section>
 
@@ -373,7 +433,6 @@
     const t = hk();
 
     $('ftime').textContent = `${pad(t.getHours())}:${pad(t.getMinutes())}:${pad(t.getSeconds())} HKT`;
-    $('dclock').textContent = `${pad(t.getHours())}:${pad(t.getMinutes())}:${pad(t.getSeconds())}`;
     if (!forced && realNight() !== night){ night = realNight(); setScene(); playSubs(); }
   }
 
@@ -399,13 +458,6 @@
   }
 
   let T = 0;
-
-  /* ---------- dashboard ---------- */
-  [34,38,36,42,40,46,44,50,47,52,56,53,58,62,60,66,63,70,74,71,78,82,80,88].forEach(h => { const i = document.createElement('i'); i.style.height = h + '%'; $('bars').appendChild(i); });
-  const SOURCES = [['Bank accounts',22],['Brokerage',31],['Exchanges',14],['Wallets',12],['Onchain positions',21]];
-  $('sources').innerHTML = SOURCES.map(([n,s]) => `<div class="src"><b>${n}</b><span class="share"><i style="width:${s*3}%"></i></span><em>Live</em></div>`).join('');
-  const srcEls = [...$('sources').children];
-  function dash(t){ const di = reduce ? -1 : t % 12; srcEls.forEach((el, i) => { const on = di === i * 2; el.classList.toggle('sync', on); el.querySelector('em').textContent = on ? 'Updating' : 'Live'; }); }
 
   /* ---------- video takes (abstract stills) ---------- */
   const FRAMES = [
@@ -518,7 +570,7 @@
 
   /* ---------- go ---------- */
   setScene(); playSubs(); tick();
-  const frame = () => { forge(T); dash(T); vid(T); };
+  const frame = () => { forge(T); vid(T); };
   frame();
   setInterval(tick, 1000);
   if (!reduce) setInterval(() => { T++; frame(); }, 700);

@@ -19,3 +19,7 @@ The static image from `https://ghchart.rshah.org/ringman007` remains as a fallba
 ## GoodInGoodOut preview
 
 The homepage app illustration is recreated in HTML/CSS from the iOS interface, with no screenshot downloads required at runtime. `gigo-demo.js` cycles through meal logging, daily totals and dashboard trends. Scene buttons select a screen and pause playback; Play resumes it. Playback stops while the phone is offscreen or the browser tab is hidden. Visitors who prefer reduced motion see a static daily view and can select other screens.
+
+## DailyMoney product film
+
+`money-demo.css` and `money-demo.js` power the four-scene portfolio preview: Dashboard, Changes, Holdings and Spending. It uses entirely fictional institutions, balances, allocations, transactions and performance figures; it has no connection to a financial account or private dashboard. The portfolio values, change waterfall, holdings and spending categories reconcile within the demo. Screen buttons pause playback on the selected view; Play restarts that chapter. Playback pauses offscreen and in hidden tabs, and reduced-motion visitors get a still preview with manual navigation.
