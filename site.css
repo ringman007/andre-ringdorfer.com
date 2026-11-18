@@ -282,3 +282,14 @@ main>.xs:first-child{border-top:1px solid var(--ink)}
 /* teaser: one family throughout so numbers and words match */
 .proof p{font:400 clamp(22px,2.3vw,30px)/1.38 var(--sans);letter-spacing:-.012em}
 .proof p b{font-size:1em;font-weight:600;letter-spacing:-.012em}
+/* keep the hero a fixed height: agent status and caption never wrap (fixes jumping on phones) */
+.lh{min-width:0}
+.lh span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1 1 auto;min-width:0}
+.rig figcaption{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Forge queue: rows keep one line so the section never changes height */
+.q-head{flex-wrap:nowrap}.q-head>span{white-space:nowrap}
+.task div{flex-wrap:nowrap}
+.task .t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.task .s{flex:none;white-space:nowrap}
+.q-foot{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.q-head b{white-space:nowrap}.q-head em{margin-left:10px}
