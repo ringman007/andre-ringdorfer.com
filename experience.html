@@ -57,14 +57,26 @@
 .xt-line a{position:relative;display:block;text-decoration:none;border-top:1px solid #0d1220;padding:20px 18px 0 0;font-size:14.5px}
 .xt-line a:last-child{padding-right:0}
 .xt-line i{position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:#0d1220}
-.xt-line a.ai i{top:-7px;width:13px;height:13px;background:#f2a73b;box-shadow:0 0 0 4px #f4f0e8}
+.xt-line a.current i{top:-7px;width:13px;height:13px;background:#f2a73b;box-shadow:0 0 0 4px #f4f0e8}
 .xt-line span{display:block}.xt-line .y,.xt-line .c{color:#585d69}.xt-line .y{font-size:14px}
 .xt-line .t{font-family:'Gloock',serif;font-size:21px;line-height:1.2;margin:4px 0 6px}
-.xt-line .u{text-decoration:underline;text-decoration-color:#f2a73b;text-decoration-thickness:2px;text-underline-offset:4px}
+.xt-parallel{margin:18px 0 0;color:#585d69;font-size:14.5px;line-height:1.6}.xt-parallel a{color:#0d1220;font-weight:600;text-decoration-color:#f2a73b;text-decoration-thickness:2px;text-underline-offset:4px;white-space:nowrap}
 .xt-line a:hover .t{color:#8a5a12}
 @media (max-width:900px){.xt-head{grid-template-columns:1fr}.xt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.xt-grid>div:nth-child(3){padding-left:0;border-left:0}.xt-grid>div{padding-bottom:18px}.xt-grid>div:nth-child(n+3){border-top:1px solid rgba(13,18,32,.18)}
-  .xt-line{grid-template-columns:1fr;margin-top:20px;border-left:1px solid #0d1220;margin-left:4px}.xt-line a{border-top:0;padding:0 0 22px 24px}.xt-line i{top:6px;left:-5px}.xt-line a.ai i{left:-7px;top:4px}}
+  .xt-line{grid-template-columns:1fr;margin-top:20px;border-left:1px solid #0d1220;margin-left:4px}.xt-line a{border-top:0;padding:0 0 22px 24px}.xt-line i{top:6px;left:-5px}.xt-line a.current i{left:-7px;top:4px}}
 @media (max-width:520px){.xt-grid{grid-template-columns:1fr}.xt-grid>div{padding:16px 0!important;border-left:0!important}.xt-grid>div+div{border-top:1px solid rgba(13,18,32,.18)}}
+
+
+/* The current AI chapter, before the completed crypto work. */
+.xt-ai{display:flex;flex-wrap:wrap;gap:28px 56px;padding:clamp(48px,6vw,72px) 0;border-bottom:1px solid rgba(13,18,32,.18);scroll-margin-top:24px}
+.xt-ai-heading{flex:1 1 240px;max-width:300px;min-width:0}
+.xt-ai h2{font-family:'Gloock',serif;font-weight:400;font-size:clamp(30px,3.1vw,38px);line-height:1.08;margin:0;text-wrap:balance}
+.xt-ai-body{position:relative;flex:3 1 460px;min-width:0;border-left:1px solid #0d1220;padding-left:clamp(20px,4.5vw,56px)}
+.xt-ai-body::before{content:'';position:absolute;top:6px;left:-5px;width:9px;height:9px;border-radius:50%;background:#b87820}
+.xt-ai-current{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#805316;margin-bottom:14px}
+.xt-ai h3{font-family:'Gloock',serif;font-weight:400;font-size:28px;line-height:1.2;margin:0}
+.xt-ai-affiliation{color:#454a56;margin:4px 0 22px;font-size:16px}
+.xt-ai-description{margin:0;max-width:62ch;font-size:17px;line-height:1.6;text-wrap:pretty}
 
 /* results as a dark panel so they read differently from the route line */
 .xt-res{margin-top:clamp(40px,4.5vw,56px);padding:clamp(24px,3vw,40px) clamp(22px,3vw,44px) clamp(28px,3.4vw,44px)!important;background:#0d1220;color:#f4f0e8}
@@ -113,10 +125,10 @@
     <div class="xt-head">
       <div>
         <h1>Experience</h1>
-        <p>Senior product manager in onchain finance, based in Hong Kong. Before crypto, I worked in strategy consulting and corporate strategy across Europe and Asia. <a href="index.html#work">Today I build with AI.</a></p>
+        <p>Product work across AI and onchain finance, based in Hong Kong. Before crypto, I worked in strategy consulting and corporate strategy across Europe and Asia. <a href="index.html#work">Today I build with AI.</a></p>
       </div>
       <dl>
-        <dt>Now</dt><dd>Senior Product Manager, Techtonic Consulting, for MANTRA Chain</dd>
+        <dt>Now</dt><dd>Product work for NVNM Digital, part of Inveniam</dd>
         <dt>Based</dt><dd>Hong Kong</dd>
         <dt>Since</dt><dd>2019</dd>
         <dt>Fields</dt><dd>Product, onchain finance, strategy, now AI</dd>
@@ -133,18 +145,31 @@
     </div>
     <div class="xt-route">
       <div class="xt-cap2"><h2>The route</h2><span>Bangkok, London, Vienna, Asia Pacific, Hong Kong</span></div>
+      <p class="xt-parallel">Alongside my product work, I build my own AI tools. <a href="index.html#work">See the AI work ↗</a></p>
       <div class="xt-line">
         <a href="#research"><i></i><span class="y">2019</span><span class="t">Research</span><span>United Nations ESCAP</span><span class="c">Bangkok</span></a>
         <a href="#paypal"><i></i><span class="y">2019–2020</span><span class="t">Corporate strategy</span><span>PayPal</span><span class="c">London</span></a>
         <a href="#consulting"><i></i><span class="y">2020</span><span class="t">Consulting</span><span>Arthur D. Little</span><span class="c">Vienna</span></a>
         <a href="#assa-abloy"><i></i><span class="y">2020–2022</span><span class="t">Corporate strategy</span><span>ASSA ABLOY</span><span class="c">Asia Pacific</span></a>
         <a href="#crypto"><i></i><span class="y">2022–now</span><span class="t">Product in crypto</span><span>HeliSwap, MANTRA Chain</span><span class="c">Hong Kong</span></a>
-        <a class="ai" href="index.html#work"><i></i><span class="y">Now</span><span class="t">AI</span><span class="u">See the AI work</span><span class="c">Hong Kong</span></a>
+        <a class="current" href="#ai-leadership"><i></i><span class="y">Now</span><span class="t">Product in AI</span><span>NVNM Digital · Inveniam</span><span class="c">Hong Kong</span></a>
       </div>
     </div>
   </div>
 
   <main style="max-width:1240px;margin:0 auto;box-sizing:border-box;padding:0 clamp(20px,5.8vw,72px)">
+
+    <section class="xt-ai" id="ai-leadership" aria-labelledby="ai-leadership-title">
+      <div class="xt-ai-heading">
+        <h2 id="ai-leadership-title">Product leadership in AI</h2>
+      </div>
+      <div class="xt-ai-body">
+        <span class="xt-ai-current">Current chapter</span>
+        <h3>NVNM Digital</h3>
+        <p class="xt-ai-affiliation">Part of Inveniam</p>
+        <p class="xt-ai-description">Following MANTRA’s acquisition by Inveniam, my work now includes product initiatives for NVNM Digital. This is the next chapter of my work across AI and financial infrastructure.</p>
+      </div>
+    </section>
 
     <section id="crypto" style="display:flex;flex-wrap:wrap;gap:28px 56px;padding:clamp(48px,6vw,72px) 0;scroll-margin-top:8px">
       <div style="flex:1 1 240px;max-width:300px;min-width:0">
@@ -335,5 +360,21 @@
   </div>
 </footer>
 </div>
+<script>
+(() => {
+  const route = document.querySelector('.xt-line');
+  const stops = [...route.children];
+  const locations = document.querySelector('.xt-route .xt-cap2 > span');
+  const vertical = matchMedia('(max-width:900px)');
+  function orderRoute() {
+    route.append(...(vertical.matches ? [...stops].reverse() : stops));
+    locations.textContent = vertical.matches
+      ? 'Hong Kong, Asia Pacific, Vienna, London, Bangkok'
+      : 'Bangkok, London, Vienna, Asia Pacific, Hong Kong';
+  }
+  vertical.addEventListener('change', orderRoute);
+  orderRoute();
+})();
+</script>
 </body>
 </html>
