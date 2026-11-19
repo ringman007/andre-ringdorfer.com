@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500&text=%E8%8B%8F%E6%96%87&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=2">
 <link rel="stylesheet" href="footer.css">
 <script src="github-calendar.js" defer></script>
 <script src="gigo-demo.js" defer></script>
@@ -325,8 +325,9 @@
     </div>
     <div class="box">
       <div class="term" id="term">
-        <div class="log" id="log"><div class="m a">Hi. I know André's work, projects and background. Pick a question or type your own.</div></div>
-        <div class="qs" id="qs"></div>
+        <div class="agent-header"><span class="agent-avatar" aria-hidden="true">a.</span><div><b>André’s agent</b><span>Answers written by André</span></div><span class="agent-status">Ready to chat</span></div>
+        <div class="log" id="log" role="log" aria-label="Conversation with André’s agent"><div class="m a">Hi. I know André's work, projects and background. Pick a question or type your own.</div></div>
+        <div class="qs"><label for="qs">A place to start</label><select id="qs"><option value="">Choose a question…</option></select></div>
         <form id="askf"><input id="q" placeholder="Type your own question" aria-label="Type your own question" autocomplete="off"><button type="submit">Ask</button></form>
       </div>
       <p class="note">Too many people burned through my API credits asking this agent for poems, so it now runs on answers I wrote myself. No AI was harmed.</p>
@@ -504,15 +505,15 @@
     ["How can I reach him?", "LinkedIn is the best way to reach André: linkedin.com/in/andre-ringdorfer. You can also explore his code on GitHub at github.com/ringman007.", true],
     ["Is this chat a real AI?", "Not quite. Every answer here was written and approved by André, so nothing is made up. The real AI is in the projects above."]
   ];
-  const FALLBACK = "I only give answers André has approved, and I don't have one for that yet. Try one of the questions below, or ask him on LinkedIn.";
+  const FALLBACK = "I only give answers André has approved, and I don't have one for that yet. Choose a suggested question, or ask him on LinkedIn.";
   const RULES = [[/forge/,0],[/real ai|chat ?bot|\bbot\b|gpt|llm|are you|is this/,7],[/reach|contact|e-?mail|linkedin|hire|hiring|get in touch|message|call him/,6],[/stud|universit|school|degree|educat|language|speak|fudan|vienna|\blbs\b/,5],[/crypto|defi|chakra|heliswap|sherpa|lucky|mantra|hackathon|web3|blockchain|staking|tvl|accelerator/,4],[/ai at work|use ai|uses ai|workflow|spec|research|how does he work/,3],[/nvnm|inveniam|day to day|job|role|product manager|\bpm\b|for a living|career/,2],[/build|project|working on|right now|current|calorie|dashboard|video|portfolio/,1]];
   const log = $('log'), term = $('term'); let busy = false;
   const scroll = () => log.scrollTop = log.scrollHeight;
   function msg(cls, text){ const d = document.createElement('div'); d.className = 'm ' + cls; d.textContent = text; log.appendChild(d); scroll(); return d; }
   function reply(text, link){
-    busy = true; term.classList.add('busy');
+    setBusy(true);
     const d = msg('a think', 'thinking'); d.insertAdjacentHTML('beforeend', '<i>.</i><i>.</i><i>.</i>');
-    const finish = () => { if (link){ const a = document.createElement('a'); a.href = 'https://www.linkedin.com/in/andre-ringdorfer/'; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'linkedin.com/in/andre-ringdorfer'; d.appendChild(a); } scroll(); busy = false; term.classList.remove('busy'); };
+    const finish = () => { if (link){ const a = document.createElement('a'); a.href = 'https://www.linkedin.com/in/andre-ringdorfer/'; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'linkedin.com/in/andre-ringdorfer'; d.appendChild(a); } scroll(); setBusy(false); };
     setTimeout(() => {
       d.className = 'm a'; d.textContent = '';
       if (reduce){ d.textContent = text; return finish(); }
@@ -522,7 +523,22 @@
     }, reduce ? 300 : 1100 + Math.random() * 1300 + Math.min(text.length * 6, 900));
   }
   function ask(q, a, link){ if (busy) return; msg('q', q); reply(a, link); }
-  QA.forEach(([q, a, l]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = q; b.onclick = () => ask(q, a, l); $('qs').appendChild(b); });
+  function setBusy(value){
+    busy = value;
+    term.classList.toggle('busy', value);
+    term.querySelectorAll('select, input, button').forEach(control => { control.disabled = value; });
+    term.querySelector('.agent-status').textContent = value ? 'Replying…' : 'Ready to chat';
+  }
+  QA.forEach(([q], i) => {
+    const option = document.createElement('option');
+    option.value = String(i); option.textContent = q; $('qs').appendChild(option);
+  });
+  $('qs').addEventListener('change', e => {
+    if (busy || e.target.value === '') return;
+    const [q, a, link] = QA[Number(e.target.value)];
+    e.target.value = '';
+    ask(q, a, link);
+  });
   $('askf').addEventListener('submit', e => {
     e.preventDefault(); const v = $('q').value.trim(); if (!v || busy) return; $('q').value = '';
     const hit = RULES.find(r => r[0].test(v.toLowerCase()));
