@@ -35,6 +35,8 @@
 <link rel="stylesheet" href="footer.css">
 <script src="github-calendar.js" defer></script>
 <script src="gigo-demo.js" defer></script>
+<link rel="stylesheet" href="forge-demo.css">
+<script src="forge-demo.js" defer></script>
 <link rel="stylesheet" href="money-demo.css?v=2">
 <script src="money-demo.js?v=2" defer></script>
 <style>.ft{--ft-max:1180px;--ft-gut:var(--gut)}</style>
@@ -81,19 +83,45 @@
   </div>
 </section>
 
-<section class="forge-s" aria-labelledby="forge-title">
+<section class="forge-s" id="forge" aria-labelledby="forge-title">
   <div class="wrap split">
-    <div style="flex:1 1 340px;max-width:500px">
+    <div class="forge-copy">
       <div class="project-index">01 / AI engineering</div>
       <h3 class="forge-title" id="forge-title">The Forge</h3>
       <p class="forge-subtitle">My around-the-clock AI engineer.</p>
       <p class="lede">It picks up tasks, writes the code and hands it in for review. Some of my own products are partly maintained by it.</p>
     </div>
-    <div class="queue" aria-label="Illustration: The Forge working through a task queue overnight">
-      <div class="q-head"><b>Task queue</b><span><span id="fclock">03:30</span><em id="fwho">Overnight</em></span></div>
-      <div id="tasks"></div>
-      <div class="q-foot" id="ffoot"></div>
-    </div>
+    <figure class="fw" data-stage="brief" aria-label="Illustrative overnight workflow: The Forge fixes a reminder that fires twice">
+      <div class="fw-top"><span class="fw-brand"><b aria-hidden="true">f.</b> THE FORGE</span><span class="fw-demo">AN ILLUSTRATIVE NIGHT SHIFT</span></div>
+      <div class="fw-moment"><div><span class="fw-eyebrow" id="fw-chapter">01 / THE BRIEF</span><h4 id="fw-title">One reminder. Twice.</h4></div><div class="fw-time"><span id="fw-clock">23:40</span><span id="fw-period">TONIGHT · HKT</span></div></div>
+      <div class="fw-stage">
+        <div class="fw-scene" data-fw-scene="brief">
+          <div class="fw-request fw-paper"><div class="fw-card-top"><span class="fw-person">A</span><span>André <small>23:40</small></span><span class="fw-ticket">TASK #042</span></div><p>“The reminder fires twice.<br>Find out why and fix it.”</p><div class="fw-card-footer">One clear brief.<span class="fw-stamp">Received</span></div></div>
+          <div class="fw-route" aria-hidden="true"><i></i><span>↓</span></div>
+          <div class="fw-agent"><span class="fw-agent-icon" aria-hidden="true">f.</span><div><b>I’ll take it from here.</b><span>Pick up the task. Work through the problem.</span></div></div>
+        </div>
+        <div class="fw-scene" data-fw-scene="inspect" hidden>
+          <div class="fw-file-stack"><div class="fw-file"><span>01</span><b>Trace the reminder</b><em>Found the trigger</em></div><div class="fw-file"><span>02</span><b>Follow the schedule</b><em>Found a second one</em></div><div class="fw-file"><span>03</span><b>Reproduce the bug</b><em class="fw-red">Two notifications</em></div></div>
+          <div class="fw-bug"><div class="fw-duplicate" aria-hidden="true"><span>Reminder</span><span>Reminder</span></div><p><b>There it is.</b><span>The same reminder is being scheduled twice.</span></p></div>
+        </div>
+        <div class="fw-scene" data-fw-scene="fix" hidden>
+          <div class="fw-patch"><div class="fw-patch-head"><span>THE CHANGE</span><span>reminders / schedule</span></div><div class="fw-code-line fw-remove"><span>−</span><div>Schedule a new reminder.<small>Even if one already exists.</small></div></div><div class="fw-code-line fw-add"><span>+</span><div>Check for an existing reminder.<small>Schedule it only once.</small></div></div><div class="fw-patch-foot"><span>One focused change</span><span class="fw-change-mark" aria-hidden="true">−1 &nbsp; +1</span></div></div>
+          <div class="fw-agent"><span class="fw-agent-icon" aria-hidden="true">f.</span><div><b>Fix the cause.</b><span>Keep the change small enough to review.</span></div></div>
+        </div>
+        <div class="fw-scene" data-fw-scene="test" hidden>
+          <div class="fw-test-result"><span class="fw-test-number">2 <i aria-hidden="true">→</i> <b>1</b></span><span>notification per reminder</span></div>
+          <div class="fw-checks"><div><span class="fw-tick" aria-hidden="true">✓</span><span>The reminder fires once</span><b>PASS</b></div><div><span class="fw-tick" aria-hidden="true">✓</span><span>Editing it still works</span><b>PASS</b></div><div><span class="fw-tick" aria-hidden="true">✓</span><span>Other reminders still work</span><b>PASS</b></div></div>
+        </div>
+        <div class="fw-scene" data-fw-scene="review" hidden>
+          <div class="fw-review fw-paper"><div class="fw-review-top"><span class="fw-person" aria-hidden="true">f.</span><span>Over to you, André.</span><span class="fw-ticket">08:30</span></div><h5>The double reminder.<br>Fixed and checked.</h5><div class="fw-review-items"><span>✓ A focused change</span><span>✓ Checks passed</span><span>✓ Explanation included</span></div><div class="fw-review-footer"><span>Ready for your review</span><span class="fw-review-seal" aria-hidden="true">↗</span></div></div>
+          <div class="fw-human"><span class="fw-person" aria-hidden="true">A</span><p><b>I review. Then it ships.</b><span>The final call stays with me.</span></p></div>
+        </div>
+      </div>
+      <div class="fw-caption"><span id="fw-caption">You leave a task. Forge picks it up.</span><button type="button" id="fw-play" aria-label="Pause Forge explainer">Pause <span aria-hidden="true">Ⅱ</span></button></div>
+      <figcaption class="fw-timeline" role="group" aria-label="Explore the overnight workflow">
+        <button type="button" data-fw-stage="brief" aria-pressed="true"><span>23:40</span><b>Brief</b></button><button type="button" data-fw-stage="inspect" aria-pressed="false"><span>23:52</span><b>Investigate</b></button><button type="button" data-fw-stage="fix" aria-pressed="false"><span>00:16</span><b>Fix</b></button><button type="button" data-fw-stage="test" aria-pressed="false"><span>00:28</span><b>Check</b></button><button type="button" data-fw-stage="review" aria-pressed="false"><span>08:30</span><b>Handoff</b></button>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -329,7 +357,6 @@
   const pad = n => String(n).padStart(2, '0');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hk = () => { const n = new Date(); return new Date(n.getTime() + (n.getTimezoneOffset() + 480) * 60000); };
-  const A = 'var(--accent)';
 
   /* ---------- skyline: Hong Kong Island from the harbour ---------- */
   (function(){
@@ -437,27 +464,6 @@
 
     $('ftime').textContent = `${pad(t.getHours())}:${pad(t.getMinutes())}:${pad(t.getSeconds())} HKT`;
     if (!forced && realNight() !== night){ night = realNight(); setScene(); playSubs(); }
-  }
-
-  /* ---------- The Forge queue ---------- */
-  const TITLES = ['Fix the reminder that fires twice', 'Add export to the weekly summary', 'Speed up search', 'Tidy the settings page'];
-  const FCLOCK = ['23:40','00:05','00:40','01:15','01:50','02:20','02:55','03:30','04:00','04:35','05:10','05:45','06:30','08:30','08:31','08:33','08:34','08:35'];
-  $('tasks').innerHTML = TITLES.map(t => `<div class="task"><div><span class="t">${t}</span><span class="s"></span></div><div class="bar"><i></i></div></div>`).join('');
-  const taskEls = [...$('tasks').children];
-  function forge(t){
-    const fs = reduce ? 12 : t % 18; let waiting = 0, approved = 0;
-    taskEls.forEach((el, i) => {
-      const p = fs - i * 2; let label, color, w, tc = '#f4f0e8';
-      if (fs >= 13 + i){ label = 'Approved by André'; color = '#7fd1a0'; w = '100%'; approved++; }
-      else if (p < 0){ label = 'Queued'; color = '#8088a3'; w = '0%'; tc = '#8088a3'; }
-      else if (p < 2){ label = 'Picked up'; color = '#c7c9d6'; w = '12%'; }
-      else if (p < 5){ label = 'Writing the code'; color = A; w = (32 + (p - 2) * 26) + '%'; }
-      else { label = 'Handed in for review'; color = '#f4f0e8'; w = '100%'; waiting++; }
-      el.querySelector('.t').style.color = tc; const s = el.querySelector('.s'); s.textContent = label; s.style.color = color;
-      const b = el.querySelector('.bar i'); b.style.width = w; b.style.background = color;
-    });
-    $('fclock').textContent = FCLOCK[fs]; $('fwho').textContent = fs >= 13 ? 'André is reviewing' : 'Overnight';
-    $('ffoot').textContent = approved === 4 ? 'All four approved' : (waiting ? waiting + ' waiting for review' : 'Nothing to review yet') + (approved ? ' · ' + approved + ' approved' : '');
   }
 
   let T = 0;
@@ -573,7 +579,7 @@
 
   /* ---------- go ---------- */
   setScene(); playSubs(); tick();
-  const frame = () => { forge(T); vid(T); };
+  const frame = () => { vid(T); };
   frame();
   setInterval(tick, 1000);
   if (!reduce) setInterval(() => { T++; frame(); }, 700);

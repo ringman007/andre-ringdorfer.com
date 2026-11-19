@@ -85,17 +85,6 @@ section{padding:clamp(64px,9vw,120px) 0}
 .forge-title{font-size:clamp(64px,8vw,108px);line-height:1;letter-spacing:-.025em;text-wrap:balance}
 .forge-subtitle{margin:24px 0 18px;font-size:clamp(24px,2.8vw,34px);line-height:1.2;text-wrap:balance}
 .forge-s .lede{color:#c7c9d6}
-.queue{flex:1 1 400px;max-width:600px;background:#141a2e;border:1px solid #262d47;border-radius:14px;overflow:hidden}
-.q-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding:16px 22px;border-bottom:1px solid #262d47;font-size:14px}
-.q-head b{font-weight:600}.q-head span{color:#aeb3c7;font-variant-numeric:tabular-nums}.q-head em{font-style:normal;color:var(--paper);margin-left:14px}
-.task{padding:16px 22px 15px;border-bottom:1px solid #1f2640}
-.task div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline}
-.task .t{font-size:16.5px;font-weight:500;transition:color .4s}
-.task .s{font-size:13.5px;transition:color .4s}
-.bar{margin-top:11px;height:3px;background:#222a45;border-radius:2px;overflow:hidden}
-.bar i{display:block;height:100%;transition:width .65s ease,background .4s}
-.q-foot{padding:14px 22px;font-size:13.5px;color:#aeb3c7}
-
 /* GoodInGoodOut app preview */
 .gigo{background:#e8edf3}
 .gigo .split{flex-direction:row-reverse;justify-content:space-between;gap:40px 64px}
