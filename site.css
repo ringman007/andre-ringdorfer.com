@@ -70,13 +70,20 @@ section{padding:clamp(64px,9vw,120px) 0}
 .lede{margin:0;font-size:18px;line-height:1.55;max-width:42ch;text-wrap:pretty}
 .h2{font-size:clamp(42px,6.4vw,92px);line-height:1;letter-spacing:-.01em}
 
-.intro{background:var(--ink);color:var(--paper);padding-bottom:0}
+.intro{background:var(--paper);color:var(--ink)}
 .intro .wrap{display:flex;flex-wrap:wrap;gap:24px 72px;align-items:flex-end}
-.intro h2{flex:1 1 380px}
-.intro p{flex:1 1 360px;max-width:500px;margin:0 0 8px;font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:#c7c9d6;text-wrap:pretty}
+.intro-heading{flex:1 1 380px}
+.eyebrow,.project-index{font:600 14px/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.eyebrow{margin-bottom:24px;color:#535b65}
+.project-index{margin-bottom:24px;color:#535b65}
+.forge-s .project-index{color:var(--accent)}
+.money .project-index{color:#b8bbc8}
+.intro p{flex:1 1 360px;max-width:500px;margin:0 0 8px;font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:#535b65;text-wrap:pretty}
 
 /* forge */
 .forge-s{background:var(--ink);color:var(--paper);padding-top:clamp(56px,8vw,110px);padding-bottom:clamp(72px,10vw,140px)}
+.forge-title{font-size:clamp(64px,8vw,108px);line-height:1;letter-spacing:-.025em;text-wrap:balance}
+.forge-subtitle{margin:24px 0 18px;font-size:clamp(24px,2.8vw,34px);line-height:1.2;text-wrap:balance}
 .forge-s .lede{color:#c7c9d6}
 .queue{flex:1 1 400px;max-width:600px;background:#141a2e;border:1px solid #262d47;border-radius:14px;overflow:hidden}
 .q-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding:16px 22px;border-bottom:1px solid #262d47;font-size:14px}
@@ -90,7 +97,7 @@ section{padding:clamp(64px,9vw,120px) 0}
 .q-foot{padding:14px 22px;font-size:13.5px;color:#aeb3c7}
 
 /* GoodInGoodOut app preview */
-.gigo{background:#e5e1ef}
+.gigo{background:#e8edf3}
 .gigo .split{flex-direction:row-reverse;justify-content:space-between;gap:40px 64px}
 .gigo .lede{color:#4e495d;margin-bottom:28px}
 .gg-scenes{display:flex;flex-wrap:wrap;gap:8px}
@@ -168,7 +175,7 @@ section{padding:clamp(64px,9vw,120px) 0}
 @media(max-width:560px){.gigo .split{gap:40px}.gg-phone{flex-basis:330px}.gg-screen{height:704px}.gigo{padding-bottom:90px}}
 
 /* video */
-.vid{background:#e8e5df}
+.vid{background:var(--paper)}
 .vid .split{align-items:flex-start;gap:40px 64px}
 .vid .copy{flex:1 1 300px;max-width:420px}
 .vid .lede{color:#45423a}
@@ -177,7 +184,7 @@ section{padding:clamp(64px,9vw,120px) 0}
 .still{position:relative;aspect-ratio:16/9;border-radius:3px;overflow:hidden}
 .still .sc{position:absolute;inset:0}
 .still .score{position:absolute;right:8px;top:6px;font:400 22px var(--serif);color:#f4f0e8;text-shadow:0 1px 6px rgba(0,0,0,.35);transition:opacity .35s}
-.still .veil{position:absolute;inset:0;background:#e8e5df;transition:opacity .5s}
+.still .veil{position:absolute;inset:0;background:var(--paper);transition:opacity .5s}
 .still .strike{position:absolute;left:-4%;right:-4%;top:50%;height:3px;background:var(--ink);transform:rotate(-14deg);transition:opacity .35s}
 .ring{position:absolute;inset:-7px -9px;border:3px solid var(--accent);border-radius:50%;transform:rotate(-3deg);transition:opacity .35s;pointer-events:none}
 .takewrap{position:relative}
@@ -187,8 +194,9 @@ section{padding:clamp(64px,9vw,120px) 0}
 .still small{position:absolute;left:9px;bottom:7px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.82);letter-spacing:.02em}
 
 /* smaller */
-.small{background:var(--paper);padding:clamp(56px,7vw,96px) 0}
-.small h3,.label{margin:0 0 18px;font:600 15px var(--sans);color:#5a5648}
+.small{background:#e5dfd3;padding:clamp(56px,7vw,96px) 0}
+.label{margin:0 0 18px;font:600 15px var(--sans);color:#5a5648}
+.small h2{margin:0 0 clamp(28px,4vw,44px);font-size:clamp(36px,4.6vw,64px);line-height:1.05;letter-spacing:-.01em}
 .ledger{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));column-gap:72px;border-top:1px solid var(--ink)}
 .ledger>div{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 20px;padding:15px 0;border-bottom:1px solid #d6d0c2}
 .ledger .n{flex:0 0 190px;font:400 22px var(--serif)}
