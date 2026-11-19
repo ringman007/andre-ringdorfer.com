@@ -7,10 +7,8 @@
   const play = document.getElementById('gg-play');
   const caption = document.getElementById('gg-caption');
   const message = phone.querySelector('.gg-message');
+  const typing = phone.querySelector('.gg-typing');
   const breakdown = phone.querySelector('.gg-breakdown');
-  const ingredients = [...phone.querySelectorAll('.gg-ingredient')];
-  const total = phone.querySelector('.gg-meal-total');
-  const confirmation = phone.querySelector('.gg-confirm');
   const text = document.getElementById('gg-typed');
   const phrase = 'Spicy tuna hand roll';
   let scene = '', elapsed = 0, paused = reduce.matches, visible = false, previous = 0;
@@ -20,17 +18,18 @@
     element.style.transform = show ? 'none' : 'translateY(6px)';
   };
   function renderLog(seconds) {
-    const complete = seconds >= 8;
+    const complete = seconds >= 5;
     text.textContent = complete ? phrase : phrase.slice(0, Math.max(0, Math.floor((seconds - .4) * 11)));
     setOpacity(message, seconds >= .4);
-    setOpacity(breakdown, seconds >= 3);
-    const shown = complete ? 3 : Math.max(0, Math.min(3, Math.floor(seconds - 3)));
-    ingredients.forEach((element, i) => setOpacity(element, i < shown));
-    setOpacity(total, seconds >= 7);
-    setOpacity(confirmation, seconds >= 8);
-    const calories = [0, 90, 150, 170][shown];
-    document.getElementById('gg-left').textContent = (1254 - calories).toLocaleString('en-US');
-    document.getElementById('gg-protein').textContent = [101,103,110,111][shown];
+    typing.hidden = seconds < 2.3 || complete;
+    breakdown.style.visibility = complete ? 'visible' : 'hidden';
+    const arrival = reduce.matches ? Number(complete) : Math.min(1, Math.max(0, (seconds - 5) / .6));
+    const easedArrival = 1 - Math.pow(1 - arrival, 3);
+    breakdown.style.opacity = easedArrival;
+    breakdown.style.transform = `translateY(${10 * (1 - easedArrival)}px) scale(${.97 + .03 * easedArrival})`;
+    const calories = complete ? 170 : 0;
+    document.getElementById('gg-left').textContent = (1172 - calories).toLocaleString('en-US');
+    document.getElementById('gg-protein').textContent = complete ? 111 : 101;
     document.getElementById('gg-progress-meal').style.width = calories / 2500 * 100 + '%';
   }
   function select(next) {
