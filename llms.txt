@@ -1,6 +1,6 @@
 # André Ringdorfer (苏文)
 
-> Senior product manager in onchain finance, based in Hong Kong. He runs a team of AI agents from a Raspberry Pi that keep working around the clock. Before AI, he shipped crypto products. Before crypto, he worked in strategy consulting and corporate strategy across Europe and Asia.
+> André works on product initiatives for NVNM Digital, part of Inveniam, following MANTRA’s acquisition. His work spans AI and financial infrastructure, based in Hong Kong. He runs a team of AI agents from a Raspberry Pi that keep working around the clock. Before AI, he shipped crypto products. Before crypto, he worked in strategy consulting and corporate strategy across Europe and Asia.
 
 Pages:
 - [AI work](https://andre-ringdorfer.com/): the AI agents and projects.
@@ -22,6 +22,7 @@ Pages:
 - ETHGlobal hackathons: US$14,000+ in prizes.
 
 ## Experience
+- Now: Product initiatives for NVNM Digital, part of Inveniam, following MANTRA’s acquisition.
 - 2022–now: Senior Product Manager, Techtonic Consulting, for MANTRA Chain, Hong Kong
 - 2022–2025: Senior Manager, Product & Strategy, HeliSwap (a MANTRA joint venture), Hong Kong
 - 2020–2022: APAC Management Associate, ASSA ABLOY, Asia Pacific
@@ -47,7 +48,7 @@ The Forge is André's AI engineer. It works around the clock: it picks up tasks,
 Mostly AI agents that do real work unattended: an AI engineer, a calorie tracker you talk to, a dashboard that pulls his whole financial portfolio into one view, and a video studio with an AI critic. A few more stay private.
 
 ### What does André do day to day?
-He's a senior product manager working on onchain finance in Hong Kong. He turns research into roadmaps, runs teams across frontend, backend, smart contracts and design, and increasingly prototypes with AI before anything reaches engineering.
+André works on product initiatives for NVNM Digital, part of Inveniam, following MANTRA's acquisition. His work now spans AI and financial infrastructure. Alongside that, he builds his own AI tools and agents in Hong Kong.
 
 ### How does he use AI at work?
 Spec first, then agents. He writes the requirements and the checks, and AI coding agents build against them. He also uses AI for fast research: competitive analyses, data catalogues and onchain investigations that used to take weeks.
